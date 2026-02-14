@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,7 +16,9 @@
             box-sizing: border-box;
         }
 
-        :root {
+        /* ===== Dark Theme (default) ===== */
+        :root,
+        [data-theme="dark"] {
             --bg-primary: #07070e;
             --bg-secondary: #0d0d1a;
             --bg-card: rgba(255, 255, 255, 0.03);
@@ -30,7 +32,64 @@
             --accent-cyan: #22d3ee;
             --accent-violet: #a78bfa;
             --gradient-primary: linear-gradient(135deg, #6366f1, #06b6d4);
-            --gradient-hero: linear-gradient(135deg, #6366f1 0%, #8b5cf6 25%, #06b6d4 50%, #6366f1 75%, #8b5cf6 100%);
+            --nav-scrolled-bg: rgba(7, 7, 14, 0.8);
+            --nav-mobile-bg: rgba(7, 7, 14, 0.95);
+            --orb-opacity: 0.15;
+            --grid-line-color: rgba(99, 102, 241, 0.03);
+            --tag-bg: rgba(99, 102, 241, 0.08);
+            --tag-border: rgba(99, 102, 241, 0.15);
+            --cat-ai-bg: rgba(99, 102, 241, 0.1);
+            --cat-ai-border: rgba(99, 102, 241, 0.2);
+            --cat-biotech-bg: rgba(34, 211, 238, 0.1);
+            --cat-biotech-border: rgba(34, 211, 238, 0.2);
+            --cat-innovation-bg: rgba(167, 139, 250, 0.1);
+            --cat-innovation-border: rgba(167, 139, 250, 0.2);
+            --connect-linkedin-bg: rgba(10, 102, 194, 0.15);
+            --connect-github-bg: rgba(255, 255, 255, 0.08);
+            --connect-cv-bg: rgba(34, 211, 238, 0.12);
+            --avatar-border: rgba(255, 255, 255, 0.1);
+            --stat-gradient: linear-gradient(135deg, #6366f1, #06b6d4);
+            --theme-toggle-bg: rgba(255, 255, 255, 0.06);
+            --theme-toggle-hover: rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== Light Theme ===== */
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: rgba(0, 0, 0, 0.02);
+            --bg-card-hover: rgba(0, 0, 0, 0.04);
+            --border-subtle: rgba(0, 0, 0, 0.06);
+            --border-glow: rgba(99, 102, 241, 0.25);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --accent-indigo: #6366f1;
+            --accent-cyan: #0891b2;
+            --accent-violet: #7c3aed;
+            --gradient-primary: linear-gradient(135deg, #6366f1, #0891b2);
+            --nav-scrolled-bg: rgba(248, 250, 252, 0.85);
+            --nav-mobile-bg: rgba(248, 250, 252, 0.97);
+            --orb-opacity: 0.07;
+            --grid-line-color: rgba(99, 102, 241, 0.04);
+            --tag-bg: rgba(99, 102, 241, 0.06);
+            --tag-border: rgba(99, 102, 241, 0.12);
+            --cat-ai-bg: rgba(99, 102, 241, 0.08);
+            --cat-ai-border: rgba(99, 102, 241, 0.15);
+            --cat-biotech-bg: rgba(8, 145, 178, 0.08);
+            --cat-biotech-border: rgba(8, 145, 178, 0.15);
+            --cat-innovation-bg: rgba(124, 58, 237, 0.08);
+            --cat-innovation-border: rgba(124, 58, 237, 0.15);
+            --connect-linkedin-bg: rgba(10, 102, 194, 0.08);
+            --connect-github-bg: rgba(0, 0, 0, 0.05);
+            --connect-cv-bg: rgba(8, 145, 178, 0.08);
+            --avatar-border: rgba(0, 0, 0, 0.08);
+            --stat-gradient: linear-gradient(135deg, #4f46e5, #0891b2);
+            --theme-toggle-bg: rgba(0, 0, 0, 0.04);
+            --theme-toggle-hover: rgba(0, 0, 0, 0.08);
+        }
+
+        :root {
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 20px;
@@ -52,6 +111,7 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         a {
@@ -78,8 +138,8 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+                linear-gradient(var(--grid-line-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-line-color) 1px, transparent 1px);
             background-size: 60px 60px;
             mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse 60% 60% at 50% 0%, black 30%, transparent 70%);
@@ -89,8 +149,9 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.15;
+            opacity: var(--orb-opacity);
             animation: float 20s ease-in-out infinite;
+            transition: opacity 0.3s ease;
         }
 
         .orb-1 {
@@ -156,7 +217,7 @@
         }
 
         .nav.scrolled {
-            background: rgba(7, 7, 14, 0.8);
+            background: var(--nav-scrolled-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
@@ -178,6 +239,12 @@
             background-clip: text;
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         .nav-links {
             display: flex;
             gap: 24px;
@@ -194,6 +261,51 @@
 
         .nav-links a:hover {
             color: var(--text-primary);
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--theme-toggle-bg);
+            border: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            color: var(--text-secondary);
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            background: var(--theme-toggle-hover);
+            border-color: var(--border-glow);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-toggle:hover svg {
+            transform: rotate(15deg);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            display: none;
+        }
+
+        [data-theme="dark"] .theme-toggle .icon-sun {
+            display: block;
+        }
+
+        [data-theme="light"] .theme-toggle .icon-moon {
+            display: block;
         }
 
         .nav-toggle {
@@ -255,8 +367,9 @@
             height: 80px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--border-subtle);
+            border: 2px solid var(--avatar-border);
             margin-bottom: 24px;
+            background: var(--bg-card);
         }
 
         .hero h1 {
@@ -320,7 +433,7 @@
 
         .btn-secondary:hover {
             background: var(--bg-card-hover);
-            border-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(99, 102, 241, 0.2);
         }
 
         .btn svg {
@@ -376,7 +489,7 @@
             width: 40px;
             height: 40px;
             border-radius: var(--radius-sm);
-            background: rgba(99, 102, 241, 0.1);
+            background: var(--tag-bg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -471,10 +584,10 @@
             font-size: 11px;
             font-family: var(--font-mono);
             padding: 4px 10px;
-            background: rgba(99, 102, 241, 0.08);
+            background: var(--tag-bg);
             color: var(--accent-indigo);
             border-radius: 100px;
-            border: 1px solid rgba(99, 102, 241, 0.15);
+            border: 1px solid var(--tag-border);
         }
 
         /* ===== Insights ===== */
@@ -520,21 +633,21 @@
         }
 
         .insight-category.ai {
-            background: rgba(99, 102, 241, 0.1);
+            background: var(--cat-ai-bg);
             color: var(--accent-indigo);
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            border: 1px solid var(--cat-ai-border);
         }
 
         .insight-category.biotech {
-            background: rgba(34, 211, 238, 0.1);
+            background: var(--cat-biotech-bg);
             color: var(--accent-cyan);
-            border: 1px solid rgba(34, 211, 238, 0.2);
+            border: 1px solid var(--cat-biotech-border);
         }
 
         .insight-category.innovation {
-            background: rgba(167, 139, 250, 0.1);
+            background: var(--cat-innovation-bg);
             color: var(--accent-violet);
-            border: 1px solid rgba(167, 139, 250, 0.2);
+            border: 1px solid var(--cat-innovation-border);
         }
 
         .insight-card h3 {
@@ -590,7 +703,7 @@
         .stat-number {
             font-size: 24px;
             font-weight: 700;
-            background: var(--gradient-primary);
+            background: var(--stat-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -645,22 +758,21 @@
         }
 
         .connect-icon.linkedin {
-            background: rgba(10, 102, 194, 0.15);
+            background: var(--connect-linkedin-bg);
+            color: #0a66c2;
+        }
+
+        [data-theme="light"] .connect-icon.linkedin {
             color: #0a66c2;
         }
 
         .connect-icon.github {
-            background: rgba(255, 255, 255, 0.08);
+            background: var(--connect-github-bg);
             color: var(--text-primary);
         }
 
-        .connect-icon.email {
-            background: rgba(99, 102, 241, 0.12);
-            color: var(--accent-indigo);
-        }
-
         .connect-icon.cv {
-            background: rgba(34, 211, 238, 0.12);
+            background: var(--connect-cv-bg);
             color: var(--accent-cyan);
         }
 
@@ -827,7 +939,7 @@
                 left: 0;
                 right: 0;
                 flex-direction: column;
-                background: rgba(7, 7, 14, 0.95);
+                background: var(--nav-mobile-bg);
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
                 border-bottom: 1px solid var(--border-subtle);
@@ -865,17 +977,27 @@
     <nav class="nav" id="nav">
         <div class="container">
             <a href="#" class="nav-logo">Kevin Li</a>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#about">About</a></li>
-                <li><a href="#expertise">Expertise</a></li>
-                <li><a href="#insights">Insights</a></li>
-                <li><a href="#connect">Connect</a></li>
-            </ul>
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
-                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+            <div class="nav-right">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#expertise">Expertise</a></li>
+                    <li><a href="#insights">Insights</a></li>
+                    <li><a href="#connect">Connect</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
+                    <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                    <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                    </svg>
+                </button>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -885,17 +1007,17 @@
             <div class="hero-content fade-up">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    <span>Building at the intersection of biotech & AI</span>
+                    <span>Biotech R&D meets AI-driven innovation</span>
                 </div>
-                <img src="/image/avatar.jpeg" alt="Kevin Li" class="hero-avatar">
+                <img src="/image/avatar1.png" alt="Kevin Li" class="hero-avatar">
                 <h1>
                     Hi, I'm <span class="gradient-text">Kevin Li</span>.<br>
                     Innovating the future of health.
                 </h1>
                 <p class="hero-description">
-                    R&D Director and biomedical scientist with a Ph.D. in Basic Medicine.
-                    I bridge nanotechnology, molecular diagnostics, and AI to create the
-                    next generation of healthcare solutions.
+                    Section Manager at Grape King Bio and former R&D Director at RiCHE Biotech.
+                    Ph.D. in Basic Medicine with expertise spanning bioassay platform development,
+                    clinical trial design, nutraceutical innovation, and nanotechnology-based diagnostics.
                 </p>
                 <div class="hero-cta">
                     <a href="#insights" class="btn btn-primary">
@@ -918,14 +1040,15 @@
                 <p class="section-label">// about</p>
                 <h2 class="section-title">Background</h2>
                 <p class="section-subtitle">
-                    A UC Davis alumnus and NCKU Ph.D. graduate, I've spent over a decade
-                    turning laboratory breakthroughs into real-world biomedical products.
+                    A UC Davis alumnus and NCKU Ph.D. graduate with deep expertise in
+                    bioassay development, clinical trials, and translational research &mdash;
+                    from nanoparticle diagnostics to functional food science.
                 </p>
             </div>
 
             <div class="stats-row fade-up">
                 <div class="stat-item">
-                    <div class="stat-number">4</div>
+                    <div class="stat-number">7+</div>
                     <div class="stat-label">Publications</div>
                 </div>
                 <div class="stat-item">
@@ -944,14 +1067,14 @@
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
                     </div>
                     <h3>Education</h3>
-                    <p>Ph.D. & M.S. from National Cheng Kung University. B.S. in Biochemistry & Molecular Biology from UC Davis.</p>
+                    <p>Ph.D. & M.S. in Basic Medicine / Oral Medicine from National Cheng Kung University. B.S. in Biochemistry & Molecular Biology from UC Davis.</p>
                 </div>
                 <div class="about-card">
                     <div class="about-card-icon">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
                     </div>
                     <h3>Current Role</h3>
-                    <p>Director of R&D at RiCHE Biotech Inc., leading nanoparticle-based diagnostic system development in Tainan, Taiwan.</p>
+                    <p>Section Manager at Grape King Bio Ltd, leading bioassay platform development, Phase II clinical trial design, and nutraceutical R&D in Taoyuan, Taiwan.</p>
                 </div>
                 <div class="about-card">
                     <div class="about-card-icon">
@@ -965,7 +1088,7 @@
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
                     </div>
                     <h3>Research Impact</h3>
-                    <p>Published in high-impact journals including Analytical Chemistry, Frontiers in Microbiology, and NPG Asia Materials.</p>
+                    <p>Published in high-impact journals including J. Cachexia Sarcopenia Muscle, Analytical Chemistry, Frontiers in Nutrition, and NPG Asia Materials.</p>
                 </div>
             </div>
         </div>
@@ -985,18 +1108,18 @@
             <div class="expertise-grid fade-up">
                 <div class="expertise-item">
                     <span class="expertise-icon">&#x1F9EC;</span>
-                    <h3>Molecular Diagnostics</h3>
-                    <p>Designing photonic qPCR systems and nanoparticle-based reagents for rapid pathogen detection.</p>
+                    <h3>Bioassay & Clinical Trials</h3>
+                    <p>Establishing bioassay platforms for screening novel functional molecules and architecting Phase II clinical trial frameworks for nutraceutical and botanical drug pipelines.</p>
                     <div class="expertise-tags">
-                        <span class="expertise-tag">qPCR</span>
-                        <span class="expertise-tag">Nanoparticles</span>
-                        <span class="expertise-tag">IVD</span>
+                        <span class="expertise-tag">Bioassay</span>
+                        <span class="expertise-tag">Phase II Trials</span>
+                        <span class="expertise-tag">Botanical Drug</span>
                     </div>
                 </div>
                 <div class="expertise-item">
                     <span class="expertise-icon">&#x1F916;</span>
                     <h3>AI & Digital Health</h3>
-                    <p>Exploring how AI agents and machine learning can accelerate diagnostics, drug discovery, and clinical workflows.</p>
+                    <p>Exploring how AI agents and machine learning can accelerate diagnostics, drug discovery, and clinical workflows in the age of autonomous systems.</p>
                     <div class="expertise-tags">
                         <span class="expertise-tag">AI Agents</span>
                         <span class="expertise-tag">LLMs</span>
@@ -1005,22 +1128,22 @@
                 </div>
                 <div class="expertise-item">
                     <span class="expertise-icon">&#x2697;&#xFE0F;</span>
-                    <h3>Nanotechnology</h3>
-                    <p>Engineering nanomaterials for targeted cancer therapy, hyperthermia treatment, and SERS-based biosensing.</p>
+                    <h3>Nanotechnology & Diagnostics</h3>
+                    <p>Engineering nanoparticle-based reagents, photonic qPCR systems, and nanomaterials for targeted cancer therapy, hyperthermia, and SERS-based biosensing.</p>
                     <div class="expertise-tags">
-                        <span class="expertise-tag">Nanomaterials</span>
-                        <span class="expertise-tag">SERS</span>
-                        <span class="expertise-tag">Hyperthermia</span>
+                        <span class="expertise-tag">Nanoparticles</span>
+                        <span class="expertise-tag">qPCR</span>
+                        <span class="expertise-tag">IVD</span>
                     </div>
                 </div>
                 <div class="expertise-item">
-                    <span class="expertise-icon">&#x1F3DB;&#xFE0F;</span>
-                    <h3>Regulatory & Commercialization</h3>
-                    <p>Navigating medical device regulations, ISO standards, and SBIR funding to bring innovations from lab to market.</p>
+                    <span class="expertise-icon">&#x1F33F;</span>
+                    <h3>Nutraceutical Innovation</h3>
+                    <p>Developing functional food materials from medicinal fungi including Antrodia cinnamomea and Sanghuangporus sanghuang for sleep, hepatoprotection, and muscle health.</p>
                     <div class="expertise-tags">
-                        <span class="expertise-tag">ISO 13485</span>
-                        <span class="expertise-tag">SBIR</span>
-                        <span class="expertise-tag">IRB</span>
+                        <span class="expertise-tag">Nutraceuticals</span>
+                        <span class="expertise-tag">Functional Food</span>
+                        <span class="expertise-tag">Mycology</span>
                     </div>
                 </div>
             </div>
@@ -1057,8 +1180,8 @@
                         <span class="insight-date">2025.01</span>
                         <span class="insight-category biotech">Biotech</span>
                     </div>
-                    <h3>Point-of-Care Diagnostics: The Next Frontier</h3>
-                    <p>Why rapid, decentralized testing powered by nanotech and AI will define the future of global health systems.</p>
+                    <h3>Functional Mycology: From Hispidin to Clinical Impact</h3>
+                    <p>How fermented medicinal fungi like Sanghuangporus sanghuang are emerging as evidence-backed nutraceuticals for sleep, muscle health, and beyond.</p>
                     <span class="insight-read-more">
                         Read more
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
@@ -1120,19 +1243,6 @@
                     </div>
                 </a>
 
-                <a href="mailto:kevinli.riche@gmail.com" class="connect-link">
-                    <div class="connect-icon email">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </div>
-                    <div class="connect-info">
-                        <h4>Email</h4>
-                        <p>kevinli.riche@gmail.com</p>
-                    </div>
-                    <div class="connect-arrow">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                    </div>
-                </a>
-
                 <a href="/2019/10/13/page/" class="connect-link">
                     <div class="connect-icon cv">
                         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
@@ -1162,6 +1272,24 @@
 </div>
 
 <script>
+    // Theme toggle with localStorage persistence
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }
+
+    // Load saved theme or default to dark
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
     // Navbar scroll effect
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
