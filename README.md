@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://kevintsli.github.io/image/avatar1.png" alt="Kevin Li" width="120" style="border-radius:50%; border: 3px solid #ef4444;" />
   
   <h1>Hi there, I'm Kevin Li 👋</h1>
   <h3>Bridging Biotech, AI, & Regulatory Science</h3>
