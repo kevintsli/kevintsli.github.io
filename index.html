@@ -825,6 +825,25 @@
             line-height: 1.5;
         }
 
+        .insight-read-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 14px;
+            font-size: 0.78rem;
+            font-family: var(--font-mono);
+            color: var(--accent-secondary);
+            transition: gap 0.2s ease;
+        }
+        .insight-read-link:hover {
+            gap: 8px;
+        }
+        .insight-read-link svg {
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+        }
+
         /* ===== CONNECT ===== */
         .socials {
             display: flex;
@@ -1345,6 +1364,10 @@
                         <h3>Probiotics and Mycelium for Longevity</h3>
                         <p>How precision fermentation and medicinal fungi are opening new pathways in longevity
                             nutrition, and where the current regulatory frameworks still have catching up to do.</p>
+                        <a href="https://substack.com/@kevintsli" target="_blank" class="insight-read-link">
+                            Read the full breakdown
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </a>
                     </article>
 
                     <article class="insight-card">
@@ -1408,6 +1431,9 @@
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
+                    </a>
+                    <a href="https://substack.com/@kevintsli" target="_blank" class="social-btn" aria-label="Substack" title="Substack">
+                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
                     </a>
                     <a href="https://github.com/kevintsli" target="_blank" class="social-btn" aria-label="GitHub"
                         title="GitHub">
