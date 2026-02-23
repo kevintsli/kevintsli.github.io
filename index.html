@@ -10,15 +10,22 @@
     <link rel="icon" href="/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         /* ===== CSS Reset & Base ===== */
-        *, *::before, *::after {
-            margin: 0; padding: 0; box-sizing: border-box;
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         /* ===== Dark Theme (Humanized Red to Orange) ===== */
-        :root, [data-theme="dark"] {
+        :root,
+        [data-theme="dark"] {
             --bg-primary: #0f0a0a;
             --bg-secondary: #140d0c;
             --bg-card: rgba(255, 255, 255, 0.02);
@@ -82,7 +89,9 @@
             --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: var(--font-sans);
@@ -95,213 +104,867 @@
             transition: background 0.4s ease, color 0.4s ease;
         }
 
-        a { text-decoration: none; color: inherit; }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         /* Ambient Glowing Background Orbs */
         .ambient-bg {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 0; pointer-events: none; overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
         }
 
         .orb {
-            position: absolute; border-radius: 50%; filter: blur(100px);
-            opacity: var(--orb-opacity); transform: translate(-50%, -50%);
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: var(--orb-opacity);
+            transform: translate(-50%, -50%);
             animation: orb-drift 20s infinite alternate ease-in-out;
             transition: opacity 0.5s ease;
         }
 
-        .orb-1 { width: 40vw; height: 40vw; background: #ef4444; top: 20%; left: 80%; }
-        .orb-2 { width: 35vw; height: 35vw; background: #f97316; top: 70%; left: 20%; animation-delay: -5s; }
-        .orb-3 { width: 30vw; height: 30vw; background: #f59e0b; top: 90%; left: 80%; animation-delay: -10s; }
+        .orb-1 {
+            width: 40vw;
+            height: 40vw;
+            background: #ef4444;
+            top: 20%;
+            left: 80%;
+        }
+
+        .orb-2 {
+            width: 35vw;
+            height: 35vw;
+            background: #f97316;
+            top: 70%;
+            left: 20%;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 30vw;
+            height: 30vw;
+            background: #f59e0b;
+            top: 90%;
+            left: 80%;
+            animation-delay: -10s;
+        }
 
         @keyframes orb-drift {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            100% { transform: translate(-40%, -60%) scale(1.1); }
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            100% {
+                transform: translate(-40%, -60%) scale(1.1);
+            }
         }
 
         /* Nav */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 20px 0; z-index: 50; transition: all 0.3s ease; border-bottom: 1px solid transparent;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 50;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
         }
+
         nav.scrolled {
-            background: var(--nav-scrolled-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); padding: 16px 0;
+            background: var(--nav-scrolled-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 0;
         }
-        .nav-container { max-width: 1024px; margin: 0 auto; padding: 0 5%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-actions { display: flex; gap: 24px; align-items: center; }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); transition: color 0.2s; }
-        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: -0.02em;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
 
         .theme-toggle {
-            background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--text-secondary); cursor: pointer; transition: all 0.2s;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.03); }
-        .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-glow); }
-        .theme-toggle .icon-sun, .theme-toggle .icon-moon { display: none; width: 18px; height: 18px;}
-        [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
-        [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+        [data-theme="light"] .theme-toggle {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .theme-toggle:hover {
+            color: var(--text-primary);
+            border-color: var(--border-glow);
+        }
+
+        .theme-toggle .icon-sun,
+        .theme-toggle .icon-moon {
+            display: none;
+            width: 18px;
+            height: 18px;
+        }
+
+        [data-theme="dark"] .theme-toggle .icon-sun {
+            display: block;
+        }
+
+        [data-theme="light"] .theme-toggle .icon-moon {
+            display: block;
+        }
 
         /* Main Wrapper */
-        .main-wrapper { position: relative; z-index: 10; max-width: 1024px; margin: 0 auto; padding: 0 5%; padding-top: 160px; }
+        .main-wrapper {
+            position: relative;
+            z-index: 10;
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 0 5%;
+            padding-top: 160px;
+        }
 
         /* ===== HERO ===== */
-        .hero { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 80px; animation: fade-up 0.8s ease-out forwards; }
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fade-up 0.8s ease-out forwards;
+        }
 
         .hero-badge {
-            display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 99px; font-size: 0.75rem; font-family: var(--font-mono); color: var(--text-secondary); margin-bottom: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
         }
-        .dot { width: 6px; height: 6px; background: var(--accent-secondary); border-radius: 50%; box-shadow: 0 0 10px var(--accent-secondary); animation: pulse-dot 2s infinite; }
-        @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 24px; max-width: 800px; }
-        .gradient-text { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .hero-desc { font-size: clamp(1rem, 1.5vw, 1.125rem); color: var(--text-secondary); max-width: 650px; margin-bottom: 40px; line-height: 1.7; }
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-secondary);
+            animation: pulse-dot 2s infinite;
+        }
 
-        .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 800px;
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            color: var(--text-secondary);
+            max-width: 650px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
         .cta-btn {
-            display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--gradient-primary); color: #fff; border-radius: var(--radius-sm); font-weight: 500; font-size: 0.95rem; box-shadow: var(--btn-glow-shadow); transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--gradient-primary);
+            color: #fff;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.95rem;
+            box-shadow: var(--btn-glow-shadow);
+            transition: all 0.3s ease;
         }
-        .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(239, 68, 68, 0.6); }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+        }
 
         .cta-secondary {
-            display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: transparent; color: var(--text-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-weight: 500; font-size: 0.95rem; transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
         }
-        .cta-secondary:hover { border-color: var(--border-glow); color: var(--text-primary); transform: translateY(-2px); }
+
+        .cta-secondary:hover {
+            border-color: var(--border-glow);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
 
         /* ===== BENTO GRID ===== */
-        .bento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 100px; }
-        .bento-card {
-            background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 32px; display: flex; flex-direction: column; transition: all 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.02); backdrop-filter: blur(10px);
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 100px;
         }
-        [data-theme="light"] .bento-card { box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06); }
-        .bento-card:hover { border-color: var(--border-glow); transform: translateY(-2px); background: var(--bg-card-hover); box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
 
-        .col-span-2 { grid-column: span 2; }
-        .col-span-3 { grid-column: span 3; }
-        .row-span-2 { grid-row: span 2; }
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(10px);
+        }
 
-        .card-header { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-        .card-header svg { width: 14px; height: 14px; }
-        .card-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.01em; }
-        .card-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; }
+        [data-theme="light"] .bento-card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .bento-card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            background: var(--bg-card-hover);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+
+        .col-span-2 {
+            grid-column: span 2;
+        }
+
+        .col-span-3 {
+            grid-column: span 3;
+        }
+
+        .row-span-2 {
+            grid-row: span 2;
+        }
+
+        .card-header {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
 
         /* ===== IDENTITY CARD (compressed about) ===== */
-        .identity-compact { display: flex; flex-direction: column; gap: 20px; height: 100%; }
-        .identity-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: auto; }
-        .stat-item { display: flex; flex-direction: column; padding: 12px; background: rgba(0,0,0,0.1); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); }
-        [data-theme="light"] .stat-item { background: rgba(0,0,0,0.02); }
-        .stat-num { font-size: 1.6rem; font-weight: 700; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.1; }
-        .stat-label { font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; font-family: var(--font-mono); }
+        .identity-compact {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .identity-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: auto;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-subtle);
+        }
+
+        [data-theme="light"] .stat-item {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .stat-num {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.1;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            font-family: var(--font-mono);
+        }
 
         /* ===== HYBRID EXPERTISE — MAIN STORY ===== */
-        .expertise-story { grid-column: span 2; }
+        .expertise-story {
+            grid-column: span 2;
+        }
 
         .venn-container {
-            display: flex; gap: 0; margin: 24px 0; position: relative;
+            display: flex;
+            gap: 0;
+            margin: 24px 0;
+            position: relative;
         }
 
         .domain-node {
-            flex: 1; padding: 20px 16px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle); position: relative; transition: all 0.3s ease;
+            flex: 1;
+            padding: 20px 16px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-subtle);
+            position: relative;
+            transition: all 0.3s ease;
         }
-        .domain-node:hover { border-color: var(--border-glow); background: var(--bg-card-hover); }
 
-        .domain-node + .domain-node { margin-left: -1px; }
+        .domain-node:hover {
+            border-color: var(--border-glow);
+            background: var(--bg-card-hover);
+        }
 
-        .domain-icon { font-size: 1.5rem; margin-bottom: 10px; }
-        .domain-label { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-primary); margin-bottom: 6px; }
-        .domain-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; }
-        .domain-skills { display: flex; flex-direction: column; gap: 4px; }
-        .domain-skill { font-size: 0.75rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; }
-        .domain-skill::before { content: ''; width: 4px; height: 4px; background: var(--accent-secondary); border-radius: 50%; flex-shrink: 0; }
+        .domain-node+.domain-node {
+            margin-left: -1px;
+        }
+
+        .domain-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .domain-label {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-primary);
+            margin-bottom: 6px;
+        }
+
+        .domain-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .domain-skills {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .domain-skill {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .domain-skill::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent-secondary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
 
         .intersection-badge {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2; background: var(--bg-primary); border: 1px solid var(--border-glow); border-radius: 99px; padding: 6px 14px; font-size: 0.7rem; font-family: var(--font-mono); color: var(--accent-primary); white-space: nowrap; box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-glow);
+            border-radius: 99px;
+            padding: 6px 14px;
+            font-size: 0.7rem;
+            font-family: var(--font-mono);
+            color: var(--accent-primary);
+            white-space: nowrap;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
         }
 
         /* ===== KNOWLEDGE CREATION FLOW ===== */
-        .knowledge-flow { display: flex; flex-direction: column; gap: 0; }
+        .knowledge-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
 
         .flow-step {
-            display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; position: relative;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 16px 0;
+            position: relative;
         }
+
         .flow-step:not(:last-child)::after {
-            content: ''; position: absolute; left: 19px; top: 52px; width: 2px; height: calc(100% - 36px); background: var(--node-line);
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 52px;
+            width: 2px;
+            height: calc(100% - 36px);
+            background: var(--node-line);
         }
 
         .flow-num {
-            width: 38px; height: 38px; border-radius: 50%; background: var(--cat-ai-bg); border: 1px solid var(--cat-ai-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); flex-shrink: 0; font-weight: 600;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--cat-ai-bg);
+            border: 1px solid var(--cat-ai-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-primary);
+            flex-shrink: 0;
+            font-weight: 600;
         }
-        .flow-content { flex: 1; }
-        .flow-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
-        .flow-desc { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
-        .flow-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-        .flow-tag { font-size: 0.68rem; font-family: var(--font-mono); padding: 2px 8px; background: var(--cat-biotech-bg); color: var(--accent-secondary); border-radius: 99px; border: 1px solid var(--cat-biotech-border); }
+
+        .flow-content {
+            flex: 1;
+        }
+
+        .flow-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .flow-desc {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .flow-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .flow-tag {
+            font-size: 0.68rem;
+            font-family: var(--font-mono);
+            padding: 2px 8px;
+            background: var(--cat-biotech-bg);
+            color: var(--accent-secondary);
+            border-radius: 99px;
+            border: 1px solid var(--cat-biotech-border);
+        }
 
         /* ===== REACH / SIGNAL CARD ===== */
-        .pill-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-        .pill { font-size: 0.75rem; font-family: var(--font-mono); padding: 4px 12px; background: var(--cat-ai-bg); color: var(--accent-primary); border-radius: 99px; border: 1px solid var(--cat-ai-border); }
+        .pill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .pill {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            padding: 4px 12px;
+            background: var(--cat-ai-bg);
+            color: var(--accent-primary);
+            border-radius: 99px;
+            border: 1px solid var(--cat-ai-border);
+        }
 
         /* ===== MILESTONE LIST ===== */
-        .milestone-list { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
-        .milestone-item { display: flex; gap: 16px; align-items: flex-start; }
-        .m-year { font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent-primary); background: var(--cat-ai-bg); padding: 3px 8px; border-radius: 99px; flex-shrink: 0; margin-top: 3px; border: 1px solid var(--cat-ai-border); }
-        .m-content h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; line-height: 1.4; }
-        .m-content p { font-size: 0.8rem; color: var(--text-secondary); }
+        .milestone-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .milestone-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .m-year {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--accent-primary);
+            background: var(--cat-ai-bg);
+            padding: 3px 8px;
+            border-radius: 99px;
+            flex-shrink: 0;
+            margin-top: 3px;
+            border: 1px solid var(--cat-ai-border);
+        }
+
+        .m-content h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+            line-height: 1.4;
+        }
+
+        .m-content p {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
 
         /* ===== PUBLICATIONS ===== */
-        .pub-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
-        .pub-item { display: flex; gap: 12px; align-items: flex-start; }
-        .pub-if { font-family:var(--font-mono); font-size: 0.68rem; color:var(--accent-secondary); background:rgba(249,115,22,0.1); padding: 3px 7px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; border: 1px solid rgba(249,115,22,0.2); }
-        .pub-info h4 { font-size: 0.88rem; font-weight: 500; margin-bottom: 2px; line-height: 1.4; }
-        .pub-info p { font-size: 0.72rem; color: var(--text-muted); }
+        .pub-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 16px;
+        }
+
+        .pub-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .pub-if {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--accent-secondary);
+            background: rgba(249, 115, 22, 0.1);
+            padding: 3px 7px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+        }
+
+        .pub-info h4 {
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+            line-height: 1.4;
+        }
+
+        .pub-info p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
 
         /* ===== INSIGHTS GRID ===== */
-        .insights-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 16px; }
-        .insight-card { background: rgba(0,0,0,0.1); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 20px; transition: all 0.2s; }
-        .insight-card:hover { border-color: var(--border-glow); }
-        [data-theme="light"] .insight-card { background: rgba(0,0,0,0.02); }
-        .insight-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
-        .insight-date { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-muted); }
-        .insight-venue { font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-muted); }
-        .insight-card h3 { font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
-        .insight-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .insight-card {
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            transition: all 0.2s;
+        }
+
+        .insight-card:hover {
+            border-color: var(--border-glow);
+        }
+
+        [data-theme="light"] .insight-card {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .insight-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .insight-date {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+
+        .insight-venue {
+            font-size: 0.72rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+        }
+
+        .insight-card h3 {
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        .insight-card p {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
 
         /* ===== CONNECT ===== */
-        .socials { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-        .social-btn {
-            width: 48px; height: 48px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border-subtle); display: grid; place-items: center; transition: all 0.2s; color: var(--text-secondary);
+        .socials {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
-        .social-btn svg { width: 20px; height: 20px; }
-        .social-btn:hover { border-color: var(--border-glow); color: var(--text-primary); background: var(--bg-card-hover); }
 
-        footer { text-align: center; padding: 40px 0; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 0.85rem; margin-top: 60px; }
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            display: grid;
+            place-items: center;
+            transition: all 0.2s;
+            color: var(--text-secondary);
+        }
 
-        @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-delay-1 { animation: fade-up 0.8s ease-out 0.1s forwards; opacity: 0; }
-        .animate-delay-2 { animation: fade-up 0.8s ease-out 0.2s forwards; opacity: 0; }
-        .animate-delay-3 { animation: fade-up 0.8s ease-out 0.3s forwards; opacity: 0; }
-        .animate-delay-4 { animation: fade-up 0.8s ease-out 0.4s forwards; opacity: 0; }
+        .social-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .social-btn:hover {
+            border-color: var(--border-glow);
+            color: var(--text-primary);
+            background: var(--bg-card-hover);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 60px;
+        }
+
+        @keyframes fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-delay-1 {
+            animation: fade-up 0.8s ease-out 0.1s forwards;
+            opacity: 0;
+        }
+
+        .animate-delay-2 {
+            animation: fade-up 0.8s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .animate-delay-3 {
+            animation: fade-up 0.8s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+
+        .animate-delay-4 {
+            animation: fade-up 0.8s ease-out 0.4s forwards;
+            opacity: 0;
+        }
 
         /* ===== SECTION DIVIDER ===== */
         .section-label {
-            font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border-subtle); }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-subtle);
+        }
 
         @media (max-width: 768px) {
-            .bento-grid { grid-template-columns: 1fr; gap: 16px; margin-bottom: 60px; }
-            .col-span-2, .col-span-3 { grid-column: span 1; }
-            .row-span-2 { grid-row: span 1; }
-            .identity-stats { grid-template-columns: repeat(2, 1fr); }
-            .insights-grid { grid-template-columns: 1fr; }
-            .hero-title { font-size: 2.25rem; }
-            .main-wrapper { padding-top: 120px; }
-            .nav-links { display: none; }
-            .venn-container { flex-direction: column; }
-            .domain-node + .domain-node { margin-left: 0; margin-top: -1px; }
-            .intersection-badge { display: none; }
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-bottom: 60px;
+            }
+
+            .col-span-2,
+            .col-span-3 {
+                grid-column: span 1;
+            }
+
+            .row-span-2 {
+                grid-row: span 1;
+            }
+
+            .identity-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.25rem;
+            }
+
+            .main-wrapper {
+                padding-top: 120px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .venn-container {
+                flex-direction: column;
+            }
+
+            .domain-node+.domain-node {
+                margin-left: 0;
+                margin-top: -1px;
+            }
+
+            .intersection-badge {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -324,8 +987,14 @@
                     <li><a href="#insights">Insights</a></li>
                 </ul>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-                    <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
-                    <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                    <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                    </svg>
                 </button>
             </div>
         </div>
@@ -340,7 +1009,7 @@
                 <span>Biotech × AI × Regulatory Science</span>
             </div>
             <h1 class="hero-title">
-                Where biology meets code<br/>
+                Where biology meets code<br />
                 meets the <span class="gradient-text">real world.</span>
             </h1>
             <p class="hero-desc">
@@ -352,7 +1021,9 @@
             <div class="hero-ctas">
                 <a href="#expertise" class="cta-btn">
                     See How I Think
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
                 </a>
                 <a href="#insights" class="cta-secondary">
                     Read My Work
@@ -365,13 +1036,17 @@
             <!-- ===== UNIQUE HYBRID EXPERTISE — PRIMARY STORY ===== -->
             <div class="bento-card col-span-2 animate-delay-1" id="expertise">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
                     Unique Hybrid Expertise
                 </div>
                 <h2 class="card-title" style="font-size:1.35rem;">Three disciplines. One integrated practice.</h2>
                 <p class="card-desc" style="margin-bottom: 24px;">
-                    Most scientists stay in the lab. Most AI practitioners stay in code. Most regulators stay in documents.
-                    I spent years building real fluency in all three, because the most useful work tends to happen at the edges between them.
+                    Most scientists choose to stay in the lab. Most AI practitioners choose to stay in code. Most
+                    regulators choose to stay in documents.
+                    I spent years building real fluency in all three, because the most useful work tends to happen at
+                    the edges between them.
                 </p>
 
                 <div class="venn-container" style="position:relative;">
@@ -410,10 +1085,13 @@
                     </div>
                 </div>
 
-                <div style="background: var(--cat-ai-bg); border: 1px solid var(--cat-ai-border); border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 4px;">
+                <div
+                    style="background: var(--cat-ai-bg); border: 1px solid var(--cat-ai-border); border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 4px;">
                     <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
                         <span style="color: var(--accent-primary); font-weight: 600;">How it adds up in practice:</span>
-                        I use AI to shorten what used to take months. Literature review, protocol optimization, and regulatory precedent mapping now run in days. That speed feeds directly into FDA-grade submissions and production-scale outcomes.
+                        I use AI to shorten what used to take months. Literature review, protocol optimization, and
+                        regulatory precedent mapping now run in days. That speed feeds directly into FDA-grade
+                        submissions and production-scale outcomes.
                     </p>
                 </div>
             </div>
@@ -421,7 +1099,10 @@
             <!-- ===== COMPACT IDENTITY ===== -->
             <div class="bento-card animate-delay-2" id="about">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
                     Identity
                 </div>
                 <div class="identity-compact">
@@ -456,7 +1137,10 @@
             <!-- ===== HOW I CREATE KNOWLEDGE ===== -->
             <div class="bento-card col-span-3 animate-delay-2" id="knowledge">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
                     How I Create Knowledge That Reaches the World
                 </div>
                 <h2 class="card-title">From lab work to global reach: how the loop works</h2>
@@ -468,12 +1152,15 @@
 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
                     <div class="knowledge-flow" style="grid-column: span 1;">
-                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 01 &nbsp;·&nbsp; Generate</p>
+                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 01 &nbsp;·&nbsp;
+                            Generate</p>
                         <div class="flow-step">
                             <div class="flow-num">01</div>
                             <div class="flow-content">
                                 <div class="flow-title">Lab → Literature</div>
-                                <div class="flow-desc">Run experiments, extract clear findings, and publish in high-impact journals. That published record becomes the foundation everything else builds on.</div>
+                                <div class="flow-desc">Run experiments, extract clear findings, and publish in
+                                    high-impact journals. That published record becomes the foundation everything else
+                                    builds on.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">IF 12.0 paper</span>
                                     <span class="flow-tag">20+ SCIE</span>
@@ -484,7 +1171,9 @@
                             <div class="flow-num">02</div>
                             <div class="flow-content">
                                 <div class="flow-title">AI Accelerates the Loop</div>
-                                <div class="flow-desc">LLMs cut literature reviews from months to days. Python optimization lets me stress-test protocols computationally before running a single experiment.</div>
+                                <div class="flow-desc">LLMs cut literature reviews from months to days. Python
+                                    optimization lets me stress-test protocols computationally before running a single
+                                    experiment.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">LLM pipelines</span>
                                     <span class="flow-tag">200% yield↑</span>
@@ -494,12 +1183,14 @@
                     </div>
 
                     <div class="knowledge-flow" style="grid-column: span 1;">
-                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 02 &nbsp;·&nbsp; Translate</p>
+                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 02 &nbsp;·&nbsp;
+                            Translate</p>
                         <div class="flow-step">
                             <div class="flow-num">03</div>
                             <div class="flow-content">
                                 <div class="flow-title">Science → Regulation</div>
-                                <div class="flow-desc">Map research findings to FDA, TFDA, and PMDA requirements. Good science only creates value when it is framed in a way regulators can act on.</div>
+                                <div class="flow-desc">Map research findings to FDA, TFDA, and PMDA requirements. Good
+                                    science only creates value when it is framed in a way regulators can act on.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">IND Phase II</span>
                                     <span class="flow-tag">NDI 1286</span>
@@ -510,7 +1201,8 @@
                             <div class="flow-num">04</div>
                             <div class="flow-content">
                                 <div class="flow-title">Regulation → Scale</div>
-                                <div class="flow-desc">Cleared ingredients reach production. Patents protect the work. Clinical data gives the next iteration a stronger foundation.</div>
+                                <div class="flow-desc">Cleared ingredients reach production. Patents protect the work.
+                                    Clinical data gives the next iteration a stronger foundation.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">8 patents</span>
                                     <span class="flow-tag">2 FDA clears</span>
@@ -520,12 +1212,14 @@
                     </div>
 
                     <div class="knowledge-flow" style="grid-column: span 1;">
-                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 03 &nbsp;·&nbsp; Broadcast</p>
+                        <p class="section-label" style="font-size:0.65rem; margin-bottom:8px;">Phase 03 &nbsp;·&nbsp;
+                            Broadcast</p>
                         <div class="flow-step">
                             <div class="flow-num">05</div>
                             <div class="flow-content">
                                 <div class="flow-title">Talks → Frameworks</div>
-                                <div class="flow-desc">International talks turn complex, multi-discipline work into practical frameworks that practitioners in other fields can actually use.</div>
+                                <div class="flow-desc">International talks turn complex, multi-discipline work into
+                                    practical frameworks that practitioners in other fields can actually use.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">Singapore</span>
                                     <span class="flow-tag">Indonesia</span>
@@ -537,7 +1231,9 @@
                             <div class="flow-num">06</div>
                             <div class="flow-content">
                                 <div class="flow-title">Frameworks → New Questions</div>
-                                <div class="flow-desc">Every new market, collaborator, and dataset sharpens the questions worth asking. That feeds back into the lab and starts the cycle again.</div>
+                                <div class="flow-desc">Every new market, collaborator, and dataset sharpens the
+                                    questions worth asking. That feeds back into the lab and starts the cycle again.
+                                </div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">Compounding</span>
                                 </div>
@@ -550,7 +1246,10 @@
             <!-- ===== IMPACT / MILESTONES ===== -->
             <div class="bento-card col-span-2 animate-delay-1" id="impact">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
                     Proof Points
                 </div>
                 <h2 class="card-title">Where the work landed</h2>
@@ -559,21 +1258,24 @@
                         <span class="m-year">2025</span>
                         <div class="m-content">
                             <h4>Industrial Elite Award — BBES Taiwan</h4>
-                            <p>Recognized by the Biotechnology and Biochemical Engineering Society of Taiwan for contributions to industry practice.</p>
+                            <p>Recognized by the Biotechnology and Biochemical Engineering Society of Taiwan for
+                                contributions to industry practice.</p>
                         </div>
                     </div>
                     <div class="milestone-item">
                         <span class="m-year">2024</span>
                         <div class="m-content">
                             <h4>Nutra-Ingredients Asia: Ingredient of the Year</h4>
-                            <p>Winner in the cognitive function category for Antrodia cinnamomea development. The ingredient is now reaching nutraceutical markets across Asia and the US.</p>
+                            <p>Winner in the cognitive function category for Antrodia cinnamomea development. The
+                                ingredient is now reaching nutraceutical markets across Asia and the US.</p>
                         </div>
                     </div>
                     <div class="milestone-item">
                         <span class="m-year">2024</span>
                         <div class="m-content">
                             <h4>FDA Phase II Clinical Trial IND</h4>
-                            <p>Successfully filed for the GKAC botanical drug targeting MASH. AI-augmented workflows helped compress the timeline from bench to submission significantly.</p>
+                            <p>Successfully filed for the GKAC botanical drug targeting MASH. AI-augmented workflows
+                                helped compress the timeline from bench to submission significantly.</p>
                         </div>
                     </div>
                 </div>
@@ -582,7 +1284,10 @@
             <!-- ===== PUBLICATIONS ===== -->
             <div class="bento-card animate-delay-2">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
                     Selected Papers
                 </div>
                 <h3 class="card-title">Publications</h3>
@@ -609,73 +1314,106 @@
                         </div>
                     </div>
                 </div>
-                <a href="https://scholar.google.com/citations?user=8Y_Rjk4AAAAJ&hl=zh-TW" target="_blank" style="margin-top: 20px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-secondary); display:flex; align-items:center; gap:6px;">
+                <a href="https://scholar.google.com/citations?user=8Y_Rjk4AAAAJ&hl=zh-TW" target="_blank"
+                    style="margin-top: 20px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-secondary); display:flex; align-items:center; gap:6px;">
                     View all on Google Scholar
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="14" height="14"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="14" height="14">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
                 </a>
             </div>
 
             <!-- ===== INSIGHTS ===== -->
             <div class="bento-card col-span-3 animate-delay-3" id="insights">
                 <div class="card-header">
-                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
                     Recent Talks & Thoughts
                 </div>
                 <h2 class="card-title">Where I've taken this thinking</h2>
                 <div class="insights-grid">
                     <article class="insight-card">
                         <div class="insight-meta">
-                            <span class="pill" style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2025</span>
+                            <span class="pill"
+                                style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2025</span>
                             <span class="insight-venue">Asia Nutraceutical Summit, Singapore</span>
                         </div>
                         <h3>Probiotics and Mycelium for Longevity</h3>
-                        <p>How precision fermentation and medicinal fungi are opening new pathways in longevity nutrition, and where the current regulatory frameworks still have catching up to do.</p>
+                        <p>How precision fermentation and medicinal fungi are opening new pathways in longevity
+                            nutrition, and where the current regulatory frameworks still have catching up to do.</p>
                     </article>
 
                     <article class="insight-card">
                         <div class="insight-meta">
-                            <span class="pill" style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2025</span>
+                            <span class="pill"
+                                style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2025</span>
                             <span class="insight-venue">Indonesia-Taiwan Industrial Forum</span>
                         </div>
                         <h3>Cross-Border Opportunities in Nutrition</h3>
-                        <p>Reflections on building Taiwan-Indonesia partnerships in nutrition. Some of the most underserved ingredient opportunities exist precisely because the regulatory frameworks between markets are not yet aligned.</p>
+                        <p>Reflections on building Taiwan-Indonesia partnerships in nutrition. Some of the most
+                            underserved ingredient opportunities exist precisely because the regulatory frameworks
+                            between markets are not yet aligned.</p>
                     </article>
 
                     <article class="insight-card">
                         <div class="insight-meta">
-                            <span class="pill" style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2024</span>
+                            <span class="pill"
+                                style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2024</span>
                             <span class="insight-venue">AI & R&D</span>
                         </div>
                         <h3>Bringing LLMs Into the Biotech Lab</h3>
-                        <p>Lessons from deploying an LLM-based nutritional assistant in a real R&D environment. What worked well, what failed quietly, and what those results say about using AI in regulated scientific settings.</p>
+                        <p>Lessons from deploying an LLM-based nutritional assistant in a real R&D environment. What
+                            worked well, what failed quietly, and what those results say about using AI in regulated
+                            scientific settings.</p>
                     </article>
 
                     <article class="insight-card">
                         <div class="insight-meta">
-                            <span class="pill" style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2024</span>
+                            <span class="pill"
+                                style="background:rgba(239,68,68,0.1); border:none; padding: 2px 8px;">2024</span>
                             <span class="insight-venue">BEST Conference, Taiwan</span>
                         </div>
                         <h3>From Bench to IND</h3>
-                        <p>A walkthrough of the journey from active compound discovery through preclinical studies to Phase II IND submission. The focus is on the practical decisions that matter at each stage and what the process actually looks like from the inside.</p>
+                        <p>A walkthrough of the journey from active compound discovery through preclinical studies to
+                            Phase II IND submission. The focus is on the practical decisions that matter at each stage
+                            and what the process actually looks like from the inside.</p>
                     </article>
                 </div>
             </div>
 
             <!-- ===== CONNECT ===== -->
-            <div class="bento-card col-span-3 animate-delay-4" style="display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
+            <div class="bento-card col-span-3 animate-delay-4"
+                style="display:flex; flex-direction:row; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;">
                 <div>
                     <h2 class="card-title" style="margin-bottom:8px;">Let's connect.</h2>
-                    <p class="card-desc">I am always happy to talk about biotech, AI in regulated science, or cross-border collaboration. Based in Taiwan, working with people worldwide. Feel free to reach out anytime.</p>
+                    <p class="card-desc">I am always happy to talk about biotech, AI in regulated science, or
+                        cross-border collaboration. Based in Taiwan, working with people worldwide. Feel free to reach
+                        out anytime.</p>
                 </div>
                 <div class="socials" style="margin:0;">
-                    <a href="https://linkedin.com/" target="_blank" class="social-btn" aria-label="LinkedIn" title="LinkedIn">
-                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                    <a href="https://linkedin.com/" target="_blank" class="social-btn" aria-label="LinkedIn"
+                        title="LinkedIn">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
                     </a>
-                    <a href="https://scholar.google.com/citations?user=8Y_Rjk4AAAAJ&hl=zh-TW" target="_blank" class="social-btn" aria-label="Google Scholar" title="Google Scholar">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>
+                    <a href="https://scholar.google.com/citations?user=8Y_Rjk4AAAAJ&hl=zh-TW" target="_blank"
+                        class="social-btn" aria-label="Google Scholar" title="Google Scholar">
+                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
                     </a>
-                    <a href="https://github.com/kevintsli" target="_blank" class="social-btn" aria-label="GitHub" title="GitHub">
-                        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    <a href="https://github.com/kevintsli" target="_blank" class="social-btn" aria-label="GitHub"
+                        title="GitHub">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
                     </a>
                 </div>
             </div>
@@ -707,4 +1445,5 @@
         });
     </script>
 </body>
+
 </html>
