@@ -23,7 +23,7 @@
             box-sizing: border-box;
         }
 
-        /* ===== Dark Theme (Humanized Red to Orange) ===== */
+        /* ===== Dark Theme ===== */
         :root,
         [data-theme="dark"] {
             color-scheme: dark;
@@ -471,7 +471,7 @@
             line-height: 1.6;
         }
 
-        /* ===== IDENTITY CARD (compressed about) ===== */
+        /* ===== IDENTITY CARD ===== */
         .identity-compact {
             display: flex;
             flex-direction: column;
@@ -954,23 +954,51 @@
         /* ===== FILM GRAIN OVERLAY ===== */
         .grain {
             position: fixed;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
             pointer-events: none;
             z-index: 1;
             opacity: 0.028;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             animation: grain-shift 6s steps(8) infinite;
         }
+
         @keyframes grain-shift {
-            0%,100% { transform: translate(0,0); }
-            12% { transform: translate(-4%,-5%); }
-            25% { transform: translate(6%,3%); }
-            37% { transform: translate(-3%,7%); }
-            50% { transform: translate(5%,-4%); }
-            62% { transform: translate(-7%,2%); }
-            75% { transform: translate(3%,6%); }
-            87% { transform: translate(-5%,-3%); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            12% {
+                transform: translate(-4%, -5%);
+            }
+
+            25% {
+                transform: translate(6%, 3%);
+            }
+
+            37% {
+                transform: translate(-3%, 7%);
+            }
+
+            50% {
+                transform: translate(5%, -4%);
+            }
+
+            62% {
+                transform: translate(-7%, 2%);
+            }
+
+            75% {
+                transform: translate(3%, 6%);
+            }
+
+            87% {
+                transform: translate(-5%, -3%);
+            }
         }
 
         /* ===== SCROLL REVEAL ===== */
@@ -979,6 +1007,7 @@
             transform: translateY(24px);
             transition: opacity 0.65s ease, transform 0.65s ease;
         }
+
         .reveal.visible {
             opacity: 1;
             transform: translateY(0);
@@ -988,17 +1017,34 @@
         .domain-node.biotech {
             border-top: 2px solid rgba(20, 184, 166, 0.4);
         }
+
         .domain-node.regulatory {
             border-top: 2px solid rgba(251, 191, 36, 0.4);
         }
+
         .domain-node.ai {
             border-top: 2px solid rgba(239, 68, 68, 0.5);
         }
-        .domain-node.biotech .domain-icon { filter: hue-rotate(140deg) saturate(1.2); }
-        .domain-node.regulatory .domain-icon { filter: hue-rotate(30deg) saturate(1.1); }
-        .domain-node.biotech .domain-label { color: #14b8a6; }
-        .domain-node.regulatory .domain-label { color: #f59e0b; }
-        .domain-node.ai .domain-label { color: var(--accent-primary); }
+
+        .domain-node.biotech .domain-icon {
+            filter: hue-rotate(140deg) saturate(1.2);
+        }
+
+        .domain-node.regulatory .domain-icon {
+            filter: hue-rotate(30deg) saturate(1.1);
+        }
+
+        .domain-node.biotech .domain-label {
+            color: #14b8a6;
+        }
+
+        .domain-node.regulatory .domain-label {
+            color: #f59e0b;
+        }
+
+        .domain-node.ai .domain-label {
+            color: var(--accent-primary);
+        }
 
         /* ===== MOBILE HAMBURGER ===== */
         .hamburger {
@@ -1010,6 +1056,7 @@
             cursor: pointer;
             padding: 4px;
         }
+
         .hamburger span {
             display: block;
             width: 22px;
@@ -1018,14 +1065,26 @@
             border-radius: 2px;
             transition: all 0.3s ease;
         }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .hamburger.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
 
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--nav-mobile-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -1035,7 +1094,11 @@
             justify-content: center;
             gap: 40px;
         }
-        .mobile-menu.open { display: flex; }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
         .mobile-menu a {
             font-family: var(--font-display);
             font-size: 2rem;
@@ -1044,7 +1107,10 @@
             opacity: 0.7;
             transition: opacity 0.2s;
         }
-        .mobile-menu a:hover { opacity: 1; }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
 
         @media (max-width: 768px) {
             .bento-grid {
@@ -1260,7 +1326,8 @@
                             <span class="domain-skill">SCIE publication</span>
                         </div>
                     </div>
-                    <div class="domain-node regulatory" style="border-radius: 0; border-left: none; border-right: none;">
+                    <div class="domain-node regulatory"
+                        style="border-radius: 0; border-left: none; border-right: none;">
                         <div class="domain-icon">⚖️</div>
                         <div class="domain-label">Domain 02</div>
                         <div class="domain-name">Regulatory Science</div>
@@ -1376,7 +1443,7 @@
                                     experiment.</div>
                                 <div class="flow-tags">
                                     <span class="flow-tag">LLM pipelines</span>
-                                    <span class="flow-tag">200% yield↑</span>
+                                    <span class="flow-tag">209% yield↑</span>
                                 </div>
                             </div>
                         </div>
@@ -1466,7 +1533,7 @@
                         <span class="m-year">2024</span>
                         <div class="m-content">
                             <h4>Nutra-Ingredients Asia: Ingredient of the Year</h4>
-                            <p>Winner in the cognitive function category for Antrodia cinnamomea development. The
+                            <p>Winner in the cognitive function category for <i>Hericium erinaceus</i> development. The
                                 ingredient is now reaching nutraceutical markets across Asia and the US.</p>
                         </div>
                     </div>
@@ -1640,7 +1707,7 @@
     </footer>
 
     <script>
-        // Theme toggle — dark is the default experience
+        // Theme toggle 
         const themeToggle = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
         const savedTheme = localStorage.getItem('theme');
