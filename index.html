@@ -26,6 +26,7 @@
         /* ===== Dark Theme (Humanized Red to Orange) ===== */
         :root,
         [data-theme="dark"] {
+            color-scheme: dark;
             --bg-primary: #0f0a0a;
             --bg-secondary: #140d0c;
             --bg-card: rgba(255, 255, 255, 0.02);
@@ -1101,6 +1102,56 @@
             .knowledge-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* ===== MOBILE FONT SIZE FIXES ===== */
+            .card-desc {
+                font-size: 1rem;
+            }
+
+            .domain-skill {
+                font-size: 0.82rem;
+            }
+
+            .flow-desc {
+                font-size: 0.88rem;
+            }
+
+            .flow-tag {
+                font-size: 0.75rem;
+            }
+
+            .insight-card p {
+                font-size: 0.88rem;
+            }
+
+            .insight-venue {
+                font-size: 0.78rem;
+            }
+
+            .m-content p {
+                font-size: 0.87rem;
+            }
+
+            .m-content h4 {
+                font-size: 0.98rem;
+            }
+
+            .pub-info h4 {
+                font-size: 0.92rem;
+            }
+
+            .pub-info p {
+                font-size: 0.78rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
+            }
+
+            .insight-read-link {
+                font-size: 0.72rem;
+                padding: 4px 12px;
+            }
         }
     </style>
 </head>
@@ -1589,10 +1640,12 @@
     </footer>
 
     <script>
-        // Theme toggle
+        // Theme toggle — dark is the default experience
         const themeToggle = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
-        let theme = localStorage.getItem('theme') || 'dark';
+        const savedTheme = localStorage.getItem('theme');
+        const theme = savedTheme || 'dark';
+        if (!savedTheme) localStorage.setItem('theme', 'dark');
         htmlElement.setAttribute('data-theme', theme);
         themeToggle.addEventListener('click', () => {
             const newTheme = htmlElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
