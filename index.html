@@ -837,12 +837,22 @@
             line-height: 1.5;
         }
 
+        .insights-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .insights-header .card-title {
+            margin-bottom: 0;
+        }
+
         .insight-read-link {
-            position: absolute;
-            top: 28px;
-            right: 32px;
             display: inline-flex;
             align-items: center;
+            flex-shrink: 0;
             font-size: 0.65rem;
             font-family: var(--font-mono);
             color: var(--accent-secondary);
@@ -1212,6 +1222,11 @@
 
             .stat-label {
                 font-size: 0.75rem;
+            }
+
+            .insights-header {
+                flex-wrap: wrap;
+                gap: 8px;
             }
 
             .insight-read-link {
@@ -1593,9 +1608,6 @@
 
             <!-- ===== INSIGHTS ===== -->
             <div class="bento-card col-span-3 reveal" id="insights">
-                <a href="https://substack.com/@kevintsli" target="_blank" class="insight-read-link">
-                    See 2026 for more updates
-                </a>
                 <div class="card-header">
                     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -1603,7 +1615,12 @@
                     </svg>
                     Recent Talks & Thoughts
                 </div>
-                <h2 class="card-title">Where I've taken this thinking</h2>
+                <div class="insights-header">
+                    <h2 class="card-title">Where I've taken this thinking</h2>
+                    <a href="https://substack.com/@kevintsli" target="_blank" class="insight-read-link">
+                        See 2026 for more updates
+                    </a>
+                </div>
                 <div class="insights-grid">
                     <article class="insight-card">
                         <div class="insight-meta">
