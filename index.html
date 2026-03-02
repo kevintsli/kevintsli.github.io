@@ -499,6 +499,22 @@
         }
 
         /* ===== IDENTITY CARD ===== */
+        .identity-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--border-glow);
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.15);
+            flex-shrink: 0;
+        }
+
+        .identity-top {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
         .identity-compact {
             display: flex;
             flex-direction: column;
@@ -894,6 +910,58 @@
         .insight-read-link:hover {
             background: rgba(249, 115, 22, 0.16);
             border-color: rgba(249, 115, 22, 0.4);
+        }
+
+        /* ===== SUBSTACK CTA ===== */
+        .substack-cta-card {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.06) 0%, rgba(239, 68, 68, 0.04) 100%);
+            border-color: rgba(249, 115, 22, 0.2);
+        }
+
+        .substack-cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .substack-cta-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent-secondary);
+            margin-bottom: 6px;
+        }
+
+        .substack-cta-body {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+
+        .substack-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: var(--radius-sm);
+            color: var(--accent-secondary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .substack-cta-btn:hover {
+            background: rgba(249, 115, 22, 0.18);
+            border-color: rgba(249, 115, 22, 0.5);
+            transform: translateY(-1px);
         }
 
         /* ===== CONNECT ===== */
@@ -1449,13 +1517,16 @@
                     Identity
                 </div>
                 <div class="identity-compact">
-                    <div>
-                        <h2 class="card-title" style="font-size:1.1rem;">Kevin Li, Ph.D.</h2>
-                        <p class="card-desc" style="font-size: 0.85rem;">
-                            UC Davis biochemistry → NCKU Ph.D. in Basic Medical Science → Asst. Dept. Manager at Grape
-                            King Bio.
-                            7+ years at the bench-to-market frontier.
-                        </p>
+                    <div class="identity-top">
+                        <img src="image/avatar1.png" alt="Kevin Li, Ph.D." class="identity-avatar">
+                        <div>
+                            <h2 class="card-title" style="font-size:1.1rem; margin-bottom:6px;">Kevin Li, Ph.D.</h2>
+                            <p class="card-desc" style="font-size: 0.85rem;">
+                                UC Davis biochemistry → NCKU Ph.D. in Basic Medical Science → Asst. Dept. Manager at Grape
+                                King Bio.
+                                7+ years at the bench-to-market frontier.
+                            </p>
+                        </div>
                     </div>
                     <div class="identity-stats">
                         <div class="stat-item">
@@ -1680,7 +1751,7 @@
                 <div class="insights-header">
                     <h2 class="card-title">Where I've taken this thinking</h2>
                     <a href="https://substack.com/@kevintsli" target="_blank" class="insight-read-link">
-                        See 2026 for more updates
+                        Writing on Substack &mdash; follow the work &rarr;
                     </a>
                 </div>
                 <div class="insights-grid">
@@ -1730,6 +1801,22 @@
                             Phase II IND submission. The focus is on the practical decisions that matter at each stage
                             and what the process actually looks like from the inside.</p>
                     </article>
+                </div>
+            </div>
+
+            <!-- ===== SUBSTACK CTA ===== -->
+            <div class="bento-card col-span-3 reveal substack-cta-card">
+                <div class="substack-cta-inner">
+                    <div class="substack-cta-text">
+                        <p class="substack-cta-eyebrow">Follow the work</p>
+                        <p class="substack-cta-body">If you want to see where this goes next, Substack is where I write.</p>
+                    </div>
+                    <a href="https://substack.com/@kevintsli" target="_blank" class="substack-cta-btn">
+                        <svg fill="currentColor" viewBox="0 0 24 24" width="16" height="16">
+                            <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z" />
+                        </svg>
+                        Subscribe on Substack
+                    </a>
                 </div>
             </div>
 
