@@ -359,12 +359,26 @@
             line-height: 1.1;
             margin-bottom: 24px;
             max-width: 800px;
+            opacity: 0;
         }
 
         .gradient-text {
             background: var(--gradient-primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            color: var(--accent-secondary);
+            font-weight: 300;
+            margin-left: 1px;
+            animation: cursor-blink 0.65s step-end infinite;
+        }
+
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .hero-desc {
@@ -1923,6 +1937,73 @@
                 mobileMenu.classList.remove('open');
             });
         });
+
+        // Hero title typewriter animation
+        (function () {
+            const h1 = document.querySelector('.hero-title');
+            if (!h1) return;
+
+            const segments = [
+                { type: 'text', content: 'Where biology meets code' },
+                { type: 'br' },
+                { type: 'text', content: 'meets the ' },
+                { type: 'gradient', content: 'real world.' }
+            ];
+
+            // Build flat char list with type metadata
+            const chars = [];
+            for (const seg of segments) {
+                if (seg.type === 'br') {
+                    chars.push({ type: 'br' });
+                } else {
+                    for (const ch of seg.content) {
+                        chars.push({ type: seg.type, ch });
+                    }
+                }
+            }
+
+            // Clear h1 while hero container is still fading in (opacity:0 via CSS)
+            h1.innerHTML = '';
+            const cursor = document.createElement('span');
+            cursor.className = 'typing-cursor';
+            cursor.textContent = '|';
+            h1.appendChild(cursor);
+
+            let plainNode = document.createTextNode('');
+            h1.insertBefore(plainNode, cursor);
+            let gradientSpan = null;
+            let i = 0;
+
+            function step() {
+                if (i >= chars.length) {
+                    cursor.remove();
+                    return;
+                }
+                const c = chars[i];
+                if (c.type === 'br') {
+                    h1.insertBefore(document.createElement('br'), cursor);
+                    plainNode = document.createTextNode('');
+                    h1.insertBefore(plainNode, cursor);
+                } else if (c.type === 'gradient') {
+                    if (!gradientSpan) {
+                        gradientSpan = document.createElement('span');
+                        gradientSpan.className = 'gradient-text';
+                        h1.insertBefore(gradientSpan, cursor);
+                    }
+                    gradientSpan.textContent += c.ch;
+                } else {
+                    plainNode.textContent += c.ch;
+                }
+                i++;
+                requestAnimationFrame(step);
+            }
+
+            // Reveal h1 and begin typing after hero fade-up completes (~800ms)
+            setTimeout(() => {
+                h1.style.opacity = '1';
+                step();
+            }, 850);
+        })();
 
         // Scroll-triggered reveal
         const observer = new IntersectionObserver((entries) => {
