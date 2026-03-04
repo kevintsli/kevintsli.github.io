@@ -1905,7 +1905,12 @@
     </footer>
 
     <script>
-        // Theme toggle 
+        // Force scroll to top on every load — prevents browser from jumping to a
+        // URL fragment (#expertise etc.) and skipping the hero animation
+        history.scrollRestoration = 'manual';
+        window.scrollTo(0, 0);
+
+        // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         const htmlElement = document.documentElement;
         const savedTheme = localStorage.getItem('theme');
@@ -1995,7 +2000,7 @@
                     plainNode.textContent += c.ch;
                 }
                 i++;
-                requestAnimationFrame(step);
+                setTimeout(step, 45);
             }
 
             // Reveal h1 and begin typing after hero fade-up completes (~800ms)
