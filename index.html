@@ -235,6 +235,12 @@
         }
         /* Hide the hero scroll cue on short viewports so it can't collide with the headline. */
         @media (max-height: 720px) { #cine-hero-cue { display: none; } }
+        /* Phones: the desktop "reading chrome" (chapter counter + prev/next arrows) collides with the footer,
+           and the full-height sections leave dead empty scrolls. Drop both — hero keeps its full screen. */
+        @media (max-width: 700px) {
+            .cine-botchrome { display: none !important; }
+            .cine-sec:not(#chap-0) { min-height: auto !important; }
+        }
 
         /* Large / ultrawide displays — widen the centered column so it fills a 27"–34"
            screen instead of floating in a narrow band. Inner paragraphs keep their own
@@ -290,7 +296,7 @@
             style="position:fixed;top:50%;right:clamp(20px,4vw,46px);transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;gap:15px;align-items:flex-end"></nav>
 
         <!-- bottom counter -->
-        <div
+        <div class="cine-botchrome"
             style="position:fixed;left:clamp(24px,5vw,64px);bottom:34px;z-index:90;display:flex;align-items:flex-end;gap:14px">
             <div style="font-family:'Space Mono',monospace;font-size:13px;letter-spacing:.1em;color:#A2937E"><span
                     id="cine-cur" style="color:#F1E8D8;font-size:15px">01</span> / <span id="cine-tot">10</span></div>
@@ -300,7 +306,7 @@
         </div>
 
         <!-- prev/next -->
-        <div style="position:fixed;right:clamp(24px,5vw,64px);bottom:30px;z-index:90;display:flex;gap:10px">
+        <div class="cine-botchrome" style="position:fixed;right:clamp(24px,5vw,64px);bottom:30px;z-index:90;display:flex;gap:10px">
             <button id="cine-prev" class="navbtn" aria-label="Previous chapter"
                 style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:.35s;display:flex;align-items:center;justify-content:center">↑</button>
             <button id="cine-next" class="navbtn" aria-label="Next chapter"
