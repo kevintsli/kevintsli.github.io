@@ -224,9 +224,11 @@
         @media (max-width: 1100px) { #cine-index { display: none !important; } }
         @media (max-width: 860px) {
             #cine-root [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 34px !important; }
-            #cine-root .cine-sec [style*="padding:120px"] { padding-top: 108px !important; padding-bottom: 84px !important; }
+            #cine-root .cine-sec [style*="padding:120px"] { padding-top: 64px !important; padding-bottom: 64px !important; }
             #cine-root h1 { font-size: clamp(44px, 12vw, 72px) !important; }
             .kli-stats { grid-template-columns: repeat(2, 1fr) !important; }
+            /* Single-column stack: kill the inner cells' left pad and side borders so every number/label/phase shares one left edge. */
+            .kli-stats > div, .kli-method > div { padding-left: 0 !important; border-right: none !important; }
         }
         @media (max-width: 600px) {
             .kli-profile-head { flex-direction: column; text-align: center; gap: 18px; }
@@ -237,7 +239,7 @@
         @media (max-height: 720px) { #cine-hero-cue { display: none; } }
         /* Phones: the desktop "reading chrome" (chapter counter + prev/next arrows) collides with the footer,
            and the full-height sections leave dead empty scrolls. Drop both — hero keeps its full screen. */
-        @media (max-width: 700px) {
+        @media (max-width: 860px) {
             .cine-botchrome { display: none !important; }
             .cine-sec:not(#chap-0) { min-height: auto !important; }
         }
@@ -537,7 +539,7 @@
                         alone is no longer enough. This is the loop I've built to turn specialized work into knowledge
                         that travels across disciplines and borders — sharper with every cycle.</p>
                 </div>
-                <div
+                <div class="kli-method"
                     style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid rgba(241,232,216,.16)">
                     <div style="padding:30px 30px 8px 0;border-right:1px solid rgba(241,232,216,.1)">
                         <div
