@@ -168,6 +168,13 @@
         html { scrollbar-width: none; }
         html::-webkit-scrollbar { width: 0; height: 0; }
         ::selection { background: #E2571B; color: #17110D; }
+        /* Visible keyboard focus — hover styles alone left keyboard users with no focus cue. */
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #E2571B; outline-offset: 3px; border-radius: 2px; }
+        /* Honor reduced-motion for the CSS entrances (the WebGL + scroll reveals are gated in JS). */
+        @media (prefers-reduced-motion: reduce) {
+            .rise { animation: none !important; }
+            #cine-hero-cue span { animation: none !important; }
+        }
 
         /* Window scrolls now; Lenis drives the smooth inertial feel. */
         #cine-root { position: relative; z-index: 1; overflow-x: hidden; }
@@ -223,12 +230,18 @@
 
         @media (max-width: 1100px) { #cine-index { display: none !important; } }
         @media (max-width: 860px) {
-            #cine-root [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 34px !important; }
-            #cine-root .cine-sec [style*="padding:120px"] { padding-top: 64px !important; padding-bottom: 64px !important; }
+            #cine-root [style*="grid-template-columns"] { grid-template-columns: 1fr !important; gap: 28px !important; }
+            #cine-root .cine-sec [style*="padding:120px"] { padding-top: 60px !important; padding-bottom: 60px !important; }
             #cine-root h1 { font-size: clamp(44px, 12vw, 72px) !important; }
-            .kli-stats { grid-template-columns: repeat(2, 1fr) !important; }
-            /* Single-column stack: kill the inner cells' left pad and side borders so every number/label/phase shares one left edge. */
-            .kli-stats > div, .kli-method > div { padding-left: 0 !important; border-right: none !important; }
+            /* Stats stay a compact 2×2 grid instead of four tall rows. The #cine-root prefix is
+               required so this out-specifies the generic grid rule above — otherwise it forces 1 column. */
+            #cine-root .kli-stats { grid-template-columns: repeat(2, 1fr) !important; column-gap: 24px !important; row-gap: 6px !important; }
+            /* Method steps stack in one column with a top rule between each. Kill the grid gap so the
+               rule + cell padding don't stack into the large dead bands that showed on phones. */
+            #cine-root .kli-method { gap: 0 !important; }
+            .kli-method > div + div { border-top: 1px solid rgba(241,232,216,.1) !important; padding-top: 30px !important; }
+            /* Every stacked cell shares one left edge: drop the desktop indents and vertical dividers. */
+            .kli-stats > div, .kli-method > div { padding-left: 0 !important; padding-right: 0 !important; border-right: none !important; }
         }
         @media (max-width: 600px) {
             .kli-profile-head { flex-direction: column; text-align: center; gap: 18px; }
@@ -1109,6 +1122,7 @@
 
                 // ----- smooth scroll + scroll-driven motion -----
                 var lenis = null;
+                var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
                 var hasMotion = !!(window.Lenis && window.gsap && window.ScrollTrigger);
                 if (hasMotion) {
                     gsap.registerPlugin(ScrollTrigger);
@@ -1143,7 +1157,7 @@
                 if (totEl) totEl.textContent = String(secs.length).padStart(2, '0');
 
                 // ----- reveal each chapter on scroll-in + parallax the watermark numerals -----
-                if (hasMotion) {
+                if (hasMotion && !reduceMotion) {
                     secs.forEach(function (s) {
                         if (s.id === 'chap-0') return; // hero already animates via CSS .rise
                         var block = s.querySelector(':scope > div');
@@ -1193,19 +1207,13 @@
                     });
                 }
 
-                function computeActive() {
-                    var mid = window.scrollY + window.innerHeight * 0.42;
-                    var idx = 0;
-                    for (var i = 0; i < secs.length; i++) { if (secs[i].offsetTop <= mid) idx = i; }
-                    setActive(idx);
-                }
-
                 function currentIndex() {
                     var mid = window.scrollY + window.innerHeight * 0.42;
                     var idx = 0;
                     for (var i = 0; i < secs.length; i++) { if (secs[i].offsetTop <= mid) idx = i; }
                     return idx;
                 }
+                function computeActive() { setActive(currentIndex()); }
 
                 function goTo(i) {
                     var idx = Math.max(0, Math.min(secs.length - 1, i));
