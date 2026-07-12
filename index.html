@@ -200,8 +200,15 @@
         .idx-dot:hover .idx-name { opacity: 1 !important; transform: translateX(0) !important; }
         .navbtn:hover { background: #E2571B !important; color: #17110D !important; border-color: #E2571B !important; }
         .glow:hover { color: #F1E8D8 !important; }
-        .card-hov { transition: transform .5s cubic-bezier(.2, .7, .2, 1), border-color .5s; }
+        .card-hov { transition: transform .3s cubic-bezier(.2, .7, .2, 1), border-color .3s; }
         .card-hov:hover { transform: translateY(-6px); border-color: rgba(226, 87, 27, .5) !important; }
+        .card-hov:active { transform: translateY(-6px) scale(.99); }
+
+        /* Press feedback — the site was hover-only; a quick scale-down on press makes every control
+           respond to the click/tap, not just the eventual navigation (Apple: respond to the press). */
+        .glow, .idx-dot { transition: transform .12s cubic-bezier(.2, .7, .2, 1); }
+        .navbtn:active, .glow:active { transform: scale(.97); }
+        .idx-dot:active { transform: scale(.9); }
 
         /* Compact, warm circular portrait — personal without dominating mobile */
         .kli-avatar {
@@ -323,9 +330,9 @@
         <!-- prev/next -->
         <div class="cine-botchrome" style="position:fixed;right:clamp(24px,5vw,64px);bottom:30px;z-index:90;display:flex;gap:10px">
             <button id="cine-prev" class="navbtn" aria-label="Previous chapter"
-                style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:.35s;display:flex;align-items:center;justify-content:center">↑</button>
+                style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;display:flex;align-items:center;justify-content:center">↑</button>
             <button id="cine-next" class="navbtn" aria-label="Next chapter"
-                style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:.35s;display:flex;align-items:center;justify-content:center">↓</button>
+                style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;display:flex;align-items:center;justify-content:center">↓</button>
         </div>
 
         <!-- progress -->
@@ -899,7 +906,7 @@
                         </div>
                         <div style="display:flex;flex-direction:column;gap:12px">
                             <a href="https://www.linkedin.com/in/kevintsli" target="_blank" rel="noopener" class="navbtn"
-                                style="display:flex;justify-content:space-between;align-items:center;background:#E2571B;color:#17110D;text-decoration:none;border:1px solid #E2571B;border-radius:8px;padding:22px 26px;transition:.35s">
+                                style="display:flex;justify-content:space-between;align-items:center;background:#E2571B;color:#17110D;text-decoration:none;border:1px solid #E2571B;border-radius:8px;padding:22px 26px;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s">
                                 <div>
                                     <div style="font-family:'Instrument Serif',serif;font-size:23px">DM me on LinkedIn
                                     </div>
