@@ -210,6 +210,19 @@
         .navbtn:active, .glow:active { transform: scale(.97); }
         .idx-dot:active { transform: scale(.9); }
 
+        /* Primary CTA (LinkedIn) is the conversion target, but .navbtn:hover only re-paints the same
+           orange — the most important button had no hover reward. Add a lift + shadow bloom and slide
+           the outbound arrow. Gated to real pointers so a tap doesn't leave a stuck hover. */
+        .cta-arrow { display: inline-block; transition: transform .2s cubic-bezier(.2, .7, .2, 1); }
+        @media (hover: hover) and (pointer: fine) {
+            .cta-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(226, 87, 27, .42); }
+            .cta-primary:hover .cta-arrow, .card-hov:hover .cta-arrow { transform: translate(3px, -3px); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .cta-primary:hover { transform: none; }
+            .cta-arrow { transition: none; }
+        }
+
         /* Compact, warm circular portrait — personal without dominating mobile */
         .kli-avatar {
             width: 158px; height: 158px; flex-shrink: 0;
@@ -919,15 +932,15 @@
                                 fastest way to reach me.</p>
                         </div>
                         <div style="display:flex;flex-direction:column;gap:12px">
-                            <a href="https://www.linkedin.com/in/kevintsli" target="_blank" rel="noopener" class="navbtn"
-                                style="display:flex;justify-content:space-between;align-items:center;background:#E2571B;color:#17110D;text-decoration:none;border:1px solid #E2571B;border-radius:8px;padding:22px 26px;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s">
+                            <a href="https://www.linkedin.com/in/kevintsli" target="_blank" rel="noopener" class="navbtn cta-primary"
+                                style="display:flex;justify-content:space-between;align-items:center;background:#E2571B;color:#17110D;text-decoration:none;border:1px solid #E2571B;border-radius:8px;padding:22px 26px;transition:transform .12s cubic-bezier(.2,.7,.2,1),box-shadow .25s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s">
                                 <div>
                                     <div style="font-family:'Instrument Serif',serif;font-size:23px">DM me on LinkedIn
                                     </div>
                                     <div
                                         style="font-family:'Space Mono',monospace;font-size:11.5px;opacity:.8;margin-top:3px">
                                         /in/kevintsli · fastest reply</div>
-                                </div><span style="font-size:20px">↗</span>
+                                </div><span class="cta-arrow" style="font-size:20px">↗</span>
                             </a>
                             <a href="https://scholar.google.com/citations?user=8Y_Rjk4AAAAJ&hl=zh-TW" target="_blank"
                                 rel="noopener" class="card-hov"
@@ -938,7 +951,7 @@
                                     <div
                                         style="font-family:'Space Mono',monospace;font-size:11.5px;color:#A2937E;margin-top:3px">
                                         Google Scholar &amp; ORCID</div>
-                                </div><span style="font-size:20px;color:#E2571B">↗</span>
+                                </div><span class="cta-arrow" style="font-size:20px;color:#E2571B">↗</span>
                             </a>
                             <a href="https://substack.com/@kevintsli?utm_source=website&utm_medium=connect_card&utm_campaign=follow"
                                 target="_blank" rel="noopener" class="card-hov"
@@ -948,7 +961,7 @@
                                     <div
                                         style="font-family:'Space Mono',monospace;font-size:11.5px;color:#A2937E;margin-top:3px">
                                         Substack — where I write next</div>
-                                </div><span style="font-size:20px;color:#E2571B">↗</span>
+                                </div><span class="cta-arrow" style="font-size:20px;color:#E2571B">↗</span>
                             </a>
                         </div>
                     </div>
@@ -1145,7 +1158,8 @@
                 var lenis = null;
                 var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
                 var hasMotion = !!(window.Lenis && window.gsap && window.ScrollTrigger);
-                if (hasMotion) {
+                // Reduced-motion users get native scrolling — Lenis inertia is a vestibular trigger.
+                if (hasMotion && !reduceMotion) {
                     gsap.registerPlugin(ScrollTrigger);
                     lenis = new Lenis({ duration: 1.1, smoothWheel: true });
                     lenis.on('scroll', ScrollTrigger.update);
@@ -1239,7 +1253,7 @@
                 function goTo(i) {
                     var idx = Math.max(0, Math.min(secs.length - 1, i));
                     if (lenis) lenis.scrollTo(secs[idx], { duration: 1.1 });
-                    else secs[idx].scrollIntoView({ behavior: 'smooth' });
+                    else secs[idx].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
                 }
 
                 var last = 0;
@@ -1263,6 +1277,36 @@
             }
             if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
             else init();
+        })();
+    </script>
+
+    <script>
+        // Stat count-up — rewards the scroll into the Profile section. Fires once; reduced-motion
+        // (or no IntersectionObserver) leaves the authored final numbers untouched.
+        (function () {
+            var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var grid = document.querySelector('.kli-stats');
+            if (!grid || reduce || !('IntersectionObserver' in window)) return;
+            var parsed = Array.prototype.slice.call(grid.querySelectorAll(':scope > div > div:first-child'))
+                .map(function (el) {
+                    var m = /^(\d+)(.*)$/.exec(el.textContent.trim());
+                    return m ? { el: el, target: parseInt(m[1], 10), suffix: m[2] } : null;
+                }).filter(Boolean);
+            if (!parsed.length) return;
+            parsed.forEach(function (p) { p.el.textContent = '0' + p.suffix; });
+            var ran = false;
+            var io = new IntersectionObserver(function (entries) {
+                if (ran || !entries[0].isIntersecting) return;
+                ran = true; io.disconnect();
+                var t0 = performance.now(), dur = 1100;
+                requestAnimationFrame(function frame(now) {
+                    var k = Math.min(1, (now - t0) / dur);
+                    var e = 1 - Math.pow(1 - k, 3); // ease-out cubic
+                    parsed.forEach(function (p) { p.el.textContent = Math.round(e * p.target) + p.suffix; });
+                    if (k < 1) requestAnimationFrame(frame);
+                });
+            }, { threshold: 0.6 });
+            io.observe(grid);
         })();
     </script>
 </body>
