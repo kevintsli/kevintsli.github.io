@@ -48,7 +48,7 @@
           "@id": "https://kevintsli.github.io/#profilepage",
           "url": "https://kevintsli.github.io/",
           "name": "Kevin Tsung-Ju Li, Ph.D. — Biotech × AI × Regulatory Science",
-          "dateModified": "2026-06-25",
+          "dateModified": "2026-07-18",
           "inLanguage": "en",
           "isPartOf": { "@id": "https://kevintsli.github.io/#website" },
           "mainEntity": { "@id": "https://kevintsli.github.io/#person" },
@@ -159,7 +159,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -191,7 +191,7 @@
         .cine-sec::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(23, 17, 13, .66); -webkit-backdrop-filter: blur(16px) saturate(1.1); backdrop-filter: blur(16px) saturate(1.1); pointer-events: none; }
         #chap-0::before { background: rgba(23, 17, 13, .5); }   /* hero — let the video read through */
         #chap-4::before { background: rgba(23, 17, 13, .56); }  /* Domain 03 — Agentome animation showcase */
-        #chap-7::before { background: rgba(23, 17, 13, .58); }  /* Agentome chapter */
+        #chap-6::before { background: rgba(23, 17, 13, .58); }  /* Agentome / Insights chapter */
 
         @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes floatCue { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(7px); opacity: 1; } }
@@ -286,7 +286,7 @@
         poster="video/agentome-poster.jpg"></video>
 
     <!-- Transparent so the WebGL canvas (z-index 0) reads through; html/body carry #17110D as the fallback. -->
-    <div id="cine-root" style="background:transparent;color:#F1E8D8;font-family:'Hanken Grotesk',system-ui,sans-serif">
+    <div id="cine-root" style="background:transparent;color:#F1E8D8;font-family:'Inter',system-ui,sans-serif">
 
         <!-- ===== LOADER ===== -->
         <div id="cine-loader"
@@ -649,85 +649,16 @@
             </div>
         </section>
 
-        <!-- ============ CHAPTER 06 · PROOF ============ -->
-        <section id="chap-6" class="cine-sec" data-chapter data-name="Proof"
+        <!-- ============ CHAPTER 06 · INSIGHTS ============ -->
+        <section id="chap-6" class="cine-sec" data-chapter data-name="Insights"
             style="min-height:100vh;display:flex;align-items:center;background:#17110D;border-top:1px solid rgba(241,232,216,.08)">
-            <div style="max-width:1240px;width:100%;margin:0 auto;padding:120px clamp(24px,6vw,96px)">
-                <div
-                    style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E2571B;margin-bottom:22px">
-                    07 — Where the work landed</div>
-                <h2
-                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,5.5vw,80px);line-height:1.0;letter-spacing:-.01em;margin-bottom:54px">
-                    Proof <span style="font-style:italic;color:#E2571B">points.</span></h2>
-                <div style="border-top:1px solid rgba(241,232,216,.16)">
-                    <article class="card-hov"
-                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
-                        <div>
-                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
-                                2024</div>
-                            <div
-                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
-                                BBES Taiwan</div>
-                        </div>
-                        <div>
-                            <h3
-                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
-                                Industrial Elite Award</h3>
-                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Recognized by the
-                                Biotechnology and Biochemical Engineering Society of Taiwan for contributions to industry
-                                practice.</p>
-                        </div>
-                    </article>
-                    <article class="card-hov"
-                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
-                        <div>
-                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
-                                2024</div>
-                            <div
-                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
-                                Nutra-Ingredients Asia</div>
-                        </div>
-                        <div>
-                            <h3
-                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
-                                Ingredient of the Year</h3>
-                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Winner in the
-                                cognitive-function category for <span style="font-style:italic;color:#C9BBA4">Hericium
-                                    erinaceus</span> development — now reaching markets across Asia and the US.</p>
-                        </div>
-                    </article>
-                    <article class="card-hov"
-                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
-                        <div>
-                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
-                                2024</div>
-                            <div
-                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
-                                FDA Submission</div>
-                        </div>
-                        <div>
-                            <h3
-                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
-                                Phase II Clinical Trial IND</h3>
-                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Filed for the GKAC
-                                botanical drug targeting MASH. AI-augmented workflows compressed the bench-to-submission
-                                timeline significantly.</p>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============ CHAPTER 07 · INSIGHTS ============ -->
-        <section id="chap-7" class="cine-sec" data-chapter data-name="Insights"
-            style="min-height:100vh;display:flex;align-items:center;background:#1C1510;border-top:1px solid rgba(241,232,216,.08)">
             <div style="max-width:1240px;width:100%;margin:0 auto;padding:120px clamp(24px,6vw,96px)">
                 <div
                     style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px">
                     <div>
                         <div
                             style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E2571B;margin-bottom:22px">
-                            08 — Recent talks &amp; writing</div>
+                            07 — Recent talks &amp; writing</div>
                         <h2
                             style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,5.5vw,80px);line-height:1.0;letter-spacing:-.01em">
                             Insights <span style="font-style:italic;color:#E2571B">&amp; talks.</span></h2>
@@ -757,7 +688,7 @@
                             receptor binding → pathway activation → physiological response → clinical outcome. What used
                             to take 3–12 months of QTOF-MS annotation now runs in minutes. The demo surfaced three
                             GLP-1-activating metabolites inside a single strain that conventional analysis had missed —
-                            later verified at industrial-scale bioreactor.</p>
+                            later verified in an industrial-scale bioreactor.</p>
                         <div style="display:flex;flex-wrap:wrap;gap:8px">
                             <span
                                 style="font-family:'Space Mono',monospace;font-size:11px;color:#E9DCC8;border:1px solid rgba(241,232,216,.2);border-radius:3px;padding:5px 11px">Agentic
@@ -769,6 +700,21 @@
                         </div>
                     </article>
                     <div style="display:flex;flex-direction:column;gap:20px">
+                        <article class="card-hov"
+                            style="background:#17110D;border:1px solid rgba(241,232,216,.14);border-radius:8px;padding:28px">
+                            <div
+                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#E2571B;margin-bottom:12px">
+                                2026 · BioAsia-Taiwan · Innovation of the Year</div>
+                            <h4
+                                style="font-family:'Instrument Serif',serif;font-size:24px;line-height:1.16;margin-bottom:8px">
+                                Standardized <span style="font-style:italic">Antrodia cinnamomea</span> for metabolic
+                                balance</h4>
+                            <p style="font-size:13.5px;line-height:1.6;color:#A2937E">A standardized bioactive from <span
+                                    style="font-style:italic;color:#C9BBA4">Antrodia cinnamomea</span> — 90%
+                                Antrodia-related content — that supports metabolic regulation, lowers inflammation, and
+                                sustains physiological balance, with low-temperature pelletization and multilayer coating
+                                holding its heat-sensitive actives stable.</p>
+                        </article>
                         <article class="card-hov"
                             style="background:#17110D;border:1px solid rgba(241,232,216,.14);border-radius:8px;padding:28px">
                             <div
@@ -827,6 +773,75 @@
                             From bench to IND</h4>
                         <p style="font-size:13.5px;line-height:1.6;color:#A2937E">Discovery through preclinical studies to
                             Phase II IND — the practical decisions that matter at each stage.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CHAPTER 07 · PROOF ============ -->
+        <section id="chap-7" class="cine-sec" data-chapter data-name="Proof"
+            style="min-height:100vh;display:flex;align-items:center;background:#1C1510;border-top:1px solid rgba(241,232,216,.08)">
+            <div style="max-width:1240px;width:100%;margin:0 auto;padding:120px clamp(24px,6vw,96px)">
+                <div
+                    style="font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#E2571B;margin-bottom:22px">
+                    08 — Where the work landed</div>
+                <h2
+                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(40px,5.5vw,80px);line-height:1.0;letter-spacing:-.01em;margin-bottom:54px">
+                    Proof <span style="font-style:italic;color:#E2571B">points.</span></h2>
+                <div style="border-top:1px solid rgba(241,232,216,.16)">
+                    <article class="card-hov"
+                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
+                        <div>
+                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
+                                2024</div>
+                            <div
+                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
+                                BBES Taiwan</div>
+                        </div>
+                        <div>
+                            <h3
+                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
+                                Industrial Elite Award</h3>
+                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Recognized by the
+                                Biotechnology and Biochemical Engineering Society of Taiwan for contributions to industry
+                                practice.</p>
+                        </div>
+                    </article>
+                    <article class="card-hov"
+                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
+                        <div>
+                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
+                                2024</div>
+                            <div
+                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
+                                Nutra-Ingredients Asia</div>
+                        </div>
+                        <div>
+                            <h3
+                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
+                                Ingredient of the Year</h3>
+                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Winner in the
+                                cognitive-function category for <span style="font-style:italic;color:#C9BBA4">Hericium
+                                    erinaceus</span> development — now reaching markets across Asia and the US.</p>
+                        </div>
+                    </article>
+                    <article class="card-hov"
+                        style="display:grid;grid-template-columns:140px 1fr;gap:30px;padding:34px 0;border-bottom:1px solid rgba(241,232,216,.12)">
+                        <div>
+                            <div style="font-family:'Instrument Serif',serif;font-size:40px;color:#E2571B;line-height:1">
+                                2024</div>
+                            <div
+                                style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7E7160;margin-top:6px">
+                                FDA Submission</div>
+                        </div>
+                        <div>
+                            <h3
+                                style="font-family:'Instrument Serif',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.12;margin-bottom:8px">
+                                Phase II Clinical Trial IND</h3>
+                            <p style="font-size:15px;line-height:1.62;color:#A2937E;max-width:620px">Filed for the GKAC
+                                botanical drug targeting MASH. AI-augmented workflows compressed the bench-to-submission
+                                timeline significantly.</p>
+                        </div>
                     </article>
                 </div>
             </div>
