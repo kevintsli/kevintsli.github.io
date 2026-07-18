@@ -193,6 +193,24 @@
         #chap-4::before { background: rgba(23, 17, 13, .56); }  /* Domain 03 — Agentome animation showcase */
         #chap-6::before { background: rgba(23, 17, 13, .58); }  /* Agentome / Insights chapter */
 
+        /* Reduced-motion is only one of Apple's three accessibility signals. The site leans on frosted
+           backdrop-filter scrims for legibility over the moving WebGL — so honor the other two here:
+           make those surfaces solid when the user asks for less transparency or more contrast. */
+        @media (prefers-reduced-transparency: reduce) {
+            .cine-sec::before, #chap-0::before, #chap-4::before, #chap-6::before {
+                background: rgba(23, 17, 13, .94); -webkit-backdrop-filter: none; backdrop-filter: none;
+            }
+        }
+        @media (prefers-contrast: more) {
+            .cine-sec::before, #chap-0::before, #chap-4::before, #chap-6::before {
+                background: rgba(23, 17, 13, .97); -webkit-backdrop-filter: none; backdrop-filter: none;
+            }
+            /* Lift the muted warm grays toward the foreground tone so body + label text clears AAA. */
+            #cine-root [style*="color:#A2937E"] { color: #D9CBB4 !important; }
+            #cine-root [style*="color:#C9BBA4"] { color: #EADFC9 !important; }
+            .faq details, .card-hov { border-color: rgba(241, 232, 216, .42) !important; }
+        }
+
         @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes floatCue { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(7px); opacity: 1; } }
         .rise { animation: riseIn .9s cubic-bezier(.2, .7, .2, 1) both; will-change: transform, opacity; }
@@ -367,7 +385,7 @@
                     · AI · Regulatory Science
                 </div>
                 <h1 class="rise"
-                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,9vw,148px);line-height:.92;letter-spacing:-.01em;margin-bottom:38px;animation-delay:2.25s">
+                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,9vw,148px);line-height:.92;letter-spacing:-.02em;margin-bottom:38px;animation-delay:2.25s">
                     Where biology meets<br>code meets the<br><span style="font-style:italic;color:#E2571B">real
                         world.</span>
                 </h1>
@@ -924,7 +942,7 @@
                                     style="width:7px;height:7px;border-radius:50%;background:#E2571B;display:inline-block"></span>10
                                 — Collaboration, advisory &amp; speaking</div>
                             <h2
-                                style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,7vw,110px);line-height:.96;letter-spacing:-.01em;margin-bottom:28px">
+                                style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(48px,7vw,110px);line-height:.96;letter-spacing:-.02em;margin-bottom:28px">
                                 Let's <span style="font-style:italic;color:#E2571B">connect.</span></h2>
                             <p style="font-size:clamp(16px,1.4vw,19px);line-height:1.66;color:#C9BBA4;max-width:480px">If
                                 you're a recruiter, collaborator, or organizer working on biotech, AI-augmented R&amp;D,
