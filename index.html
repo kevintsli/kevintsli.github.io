@@ -172,7 +172,6 @@
         a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid #E2571B; outline-offset: 3px; border-radius: 2px; }
         /* Honor reduced-motion for the CSS entrances (the WebGL + scroll reveals are gated in JS). */
         @media (prefers-reduced-motion: reduce) {
-            .rise { animation: none !important; }
             #cine-hero-cue span { animation: none !important; }
         }
 
@@ -211,10 +210,15 @@
             .faq details, .card-hov { border-color: rgba(241, 232, 216, .42) !important; }
         }
 
-        @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes floatCue { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(7px); opacity: 1; } }
-        .rise { animation: riseIn .9s cubic-bezier(.2, .7, .2, 1) both; will-change: transform, opacity; }
         #cine-loader { transition: opacity .8s ease, transform .8s ease; }
+
+        /* Masked word reveal (Meng's cinematic motion system). Words rise out of an overflow mask, so
+           headings arrive in reading order instead of fading in as one block. The padding/negative-margin
+           pair widens the clip box past the line box — without it, Instrument Serif's italic descenders
+           get sheared at line-height:.92. Zero-cost when JS never runs: the splitter builds these wrappers. */
+        .motion-word-mask { display: inline-block; overflow: hidden; vertical-align: top; padding: .16em .05em .24em; margin: -.16em -.05em -.24em; }
+        .motion-word { display: inline-block; will-change: transform, opacity; }
         .idx-dot:hover .idx-name { opacity: 1 !important; transform: translateX(0) !important; }
         .navbtn:hover { background: #E2571B !important; color: #17110D !important; border-color: #E2571B !important; }
         .glow:hover { color: #F1E8D8 !important; }
@@ -225,7 +229,9 @@
         /* Press feedback — the site was hover-only; a quick scale-down on press makes every control
            respond to the click/tap, not just the eventual navigation (Apple: respond to the press). */
         .glow, .idx-dot { transition: transform .12s cubic-bezier(.2, .7, .2, 1); }
-        .navbtn:active, .glow:active { transform: scale(.97); }
+        /* Magnetic buttons have GSAP writing an inline transform — a CSS :active transform would be
+           overwritten by it and never fire. Those two get their press feedback from GSAP instead. */
+        .navbtn:not([data-magnetic]):active, .glow:active { transform: scale(.97); }
         .idx-dot:active { transform: scale(.9); }
 
         /* Primary CTA (LinkedIn) is the conversion target, but .navbtn:hover only re-paints the same
@@ -360,44 +366,48 @@
 
         <!-- prev/next -->
         <div class="cine-botchrome" style="position:fixed;right:clamp(24px,5vw,64px);bottom:30px;z-index:90;display:flex;gap:10px">
-            <button id="cine-prev" class="navbtn" aria-label="Previous chapter"
+            <button id="cine-prev" class="navbtn" data-magnetic aria-label="Previous chapter"
                 style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;display:flex;align-items:center;justify-content:center">↑</button>
-            <button id="cine-next" class="navbtn" aria-label="Next chapter"
+            <button id="cine-next" class="navbtn" data-magnetic aria-label="Next chapter"
                 style="width:46px;height:46px;border-radius:50%;border:1px solid rgba(241,232,216,.25);background:transparent;color:#F1E8D8;font-size:18px;cursor:pointer;transition:transform .12s cubic-bezier(.2,.7,.2,1),background .3s,color .3s,border-color .3s;display:flex;align-items:center;justify-content:center">↓</button>
         </div>
 
         <!-- progress -->
         <div style="position:fixed;left:0;bottom:0;z-index:91;height:2px;width:100%;background:rgba(241,232,216,.08)">
+            <!-- scaleX (a transform) rather than width (a layout property) so the bar can be scrubbed
+                 continuously against real scroll without triggering layout on every frame. -->
             <div id="cine-prog"
-                style="height:100%;width:11%;background:#E2571B;transition:width .6s cubic-bezier(.2,.7,.2,1)"></div>
+                style="height:100%;width:100%;background:#E2571B;transform:scaleX(.02);transform-origin:left;will-change:transform"></div>
         </div>
 
         <!-- ============ CHAPTER 00 · HERO ============ -->
         <section id="chap-0" class="cine-sec" data-chapter data-name="Intersection"
             style="position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden">
-            <div aria-hidden="true"
+            <!-- data-hero orders the entrance: glow, label, headline, copy, cue. The timeline starts when
+                 the loader clears instead of via hard-coded CSS animation-delays that had to guess at it. -->
+            <div aria-hidden="true" data-hero="0"
                 style="position:absolute;inset:0;background:radial-gradient(80% 60% at 70% 30%,rgba(226,87,27,.16),rgba(23,17,13,0) 60%);pointer-events:none">
             </div>
             <div style="position:relative;max-width:1240px;width:100%;margin:0 auto;padding:0 clamp(24px,6vw,96px)">
-                <div class="rise"
-                    style="display:flex;align-items:center;gap:12px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#E2571B;margin-bottom:40px;animation-delay:2.1s">
+                <div data-hero="1"
+                    style="display:flex;align-items:center;gap:12px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#E2571B;margin-bottom:40px">
                     <span style="width:7px;height:7px;border-radius:50%;background:#E2571B;display:inline-block"></span>Biotech
                     · AI · Regulatory Science
                 </div>
-                <h1 class="rise"
-                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,9vw,148px);line-height:.92;letter-spacing:-.02em;margin-bottom:38px;animation-delay:2.25s">
+                <h1 data-hero="2"
+                    style="font-family:'Instrument Serif',serif;font-weight:400;font-size:clamp(52px,9vw,148px);line-height:.92;letter-spacing:-.02em;margin-bottom:38px">
                     Where biology meets<br>code meets the<br><span style="font-style:italic;color:#E2571B">real
                         world.</span>
                 </h1>
-                <p class="rise"
-                    style="font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#C9BBA4;max-width:560px;animation-delay:2.45s">
+                <p data-hero="3"
+                    style="font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#C9BBA4;max-width:560px">
                     I'm <span style="color:#F1E8D8;font-weight:600">Kevin Tsung-Ju Li</span> (Kevin Li) — a Ph.D. biotech
                     R&amp;D scientist, AI practitioner, and FDA regulatory strategist at Grape King Bio in Taiwan, working
                     where fermentation science, AI-augmented R&amp;D, and global regulation meet.
                 </p>
             </div>
-            <div class="rise" id="cine-hero-cue"
-                style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation-delay:2.7s">
+            <div id="cine-hero-cue" data-hero="4"
+                style="position:absolute;left:50%;bottom:30px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px">
                 <span
                     style="font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#7E7160">Scroll
                     to enter</span>
@@ -1176,10 +1186,20 @@
                 var lenis = null;
                 var reduceMotion = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
                 var hasMotion = !!(window.Lenis && window.gsap && window.ScrollTrigger);
+                var motionOn = hasMotion && !reduceMotion;
+                // ScrollTrigger is useful even for reduced-motion users — it drives the progress bar and
+                // chapter sync, which track scroll rather than animate on their own.
+                var hasST = !!(window.gsap && window.ScrollTrigger);
+                if (hasST) {
+                    gsap.registerPlugin(ScrollTrigger);
+                    gsap.defaults({ ease: 'power3.out', duration: .85 });
+                }
                 // Reduced-motion users get native scrolling — Lenis inertia is a vestibular trigger.
                 if (hasMotion && !reduceMotion) {
-                    gsap.registerPlugin(ScrollTrigger);
-                    lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+                    // lerp beats a fixed duration here: it settles proportionally to distance, so a flick
+                    // and a nudge both feel weighted. wheelMultiplier <1 keeps the scroll deliberate;
+                    // anchors:true routes the header's #chap-0 link through Lenis instead of jumping.
+                    lenis = new Lenis({ lerp: .08, smoothWheel: true, wheelMultiplier: .9, anchors: true });
                     lenis.on('scroll', ScrollTrigger.update);
                     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
                     gsap.ticker.lagSmoothing(0);
@@ -1199,6 +1219,8 @@
                         setTimeout(function () {
                             var l = document.getElementById('cine-loader');
                             if (l) { l.style.opacity = '0'; l.style.transform = 'translateY(-12px)'; l.style.visibility = 'hidden'; }
+                            // Hero enters as the loader dissolves, so the two read as one handoff.
+                            if (motionOn) heroIntro();
                         }, 450);
                     }
                 }
@@ -1210,20 +1232,153 @@
                 if (totEl) totEl.textContent = String(secs.length).padStart(2, '0');
 
                 // ----- reveal each chapter on scroll-in + parallax the watermark numerals -----
-                if (hasMotion && !reduceMotion) {
+                // Sections used to fade in as one 48px slab. Now each one plays a small timeline in
+                // reading order — label, heading (word by word), copy, then the cards — so the eye is
+                // led down the page instead of being handed a finished block.
+                if (motionOn) {
                     secs.forEach(function (s) {
-                        if (s.id === 'chap-0') return; // hero already animates via CSS .rise
-                        var block = s.querySelector(':scope > div');
-                        if (block) gsap.from(block, {
-                            y: 48, opacity: 0, duration: 1.05, ease: 'power3.out',
-                            scrollTrigger: { trigger: s, start: 'top 72%' }
-                        });
+                        if (s.id !== 'chap-0') revealSection(s);   // hero has its own loader-timed intro
                     });
                     gsap.utils.toArray('.kli-watermark').forEach(function (w) {
                         gsap.to(w, {
                             yPercent: -16, ease: 'none',
                             scrollTrigger: { trigger: w.closest('.cine-sec'), start: 'top bottom', end: 'bottom top', scrub: true }
                         });
+                    });
+                    initMagnetic();
+                    // Fonts and the video poster settle after init and shift every trigger's start point.
+                    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+                }
+
+                // Wrap each word of a heading in an overflow mask so it can rise into place. Walks text
+                // nodes rather than rewriting textContent — the headings carry inline <span> accents and
+                // <br> line breaks that a flat rebuild would throw away.
+                function splitWords(el) {
+                    if (!el || el.dataset.split) return [];
+                    // Read the label off a clone with <br> swapped for a space — textContent alone runs the
+                    // words either side of a line break together ("meetscode").
+                    var clone = el.cloneNode(true);
+                    Array.prototype.slice.call(clone.querySelectorAll('br')).forEach(function (b) {
+                        b.parentNode.replaceChild(document.createTextNode(' '), b);
+                    });
+                    var label = (clone.textContent || '').replace(/\s+/g, ' ').trim();
+                    var words = [];
+                    (function walk(node) {
+                        Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+                            if (child.nodeType === 3) {
+                                var frag = document.createDocumentFragment();
+                                child.nodeValue.split(/(\s+)/).forEach(function (part) {
+                                    if (!part) return;
+                                    if (!part.trim()) { frag.appendChild(document.createTextNode(part)); return; }
+                                    var mask = document.createElement('span');
+                                    var word = document.createElement('span');
+                                    mask.className = 'motion-word-mask';
+                                    mask.setAttribute('aria-hidden', 'true');
+                                    word.className = 'motion-word';
+                                    word.textContent = part;
+                                    mask.appendChild(word);
+                                    frag.appendChild(mask);
+                                    words.push(word);
+                                });
+                                node.replaceChild(frag, child);
+                            } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+                                walk(child);
+                            }
+                        });
+                    })(el);
+                    // The visible words are aria-hidden, so restate the heading as the accessible name —
+                    // otherwise a screen reader announces it one fragment at a time.
+                    if (words.length) el.setAttribute('aria-label', label);
+                    el.dataset.split = '1';
+                    return words;
+                }
+
+                // Flatten a section down to the elements worth animating separately: descend through any
+                // wrapper that merely contains the heading, so the heading ends up a sibling of the label
+                // and copy rather than buried inside one opaque block.
+                function atoms(el, head, depth) {
+                    var out = [];
+                    Array.prototype.slice.call(el.children).forEach(function (k) {
+                        if (k.classList.contains('kli-watermark')) return;   // parallaxed separately
+                        if (head && k !== head && k.contains(head) && depth < 5) out = out.concat(atoms(k, head, depth + 1));
+                        else out.push(k);
+                    });
+                    return out;
+                }
+
+                // A container whose children are *all* cards stages better as a stagger of cards.
+                function expand(t) {
+                    var kids = Array.prototype.slice.call(t.children);
+                    var cards = kids.filter(function (k) {
+                        return k.classList.contains('card-hov') || k.classList.contains('cta-primary')
+                            || k.tagName === 'ARTICLE' || k.tagName === 'DETAILS';
+                    });
+                    return (cards.length >= 2 && cards.length === kids.length) ? cards : [t];
+                }
+
+                function revealSection(sec) {
+                    var root = sec.querySelector(':scope > div');
+                    if (!root) return;
+                    var head = sec.querySelector('h2');
+                    var list = [];
+                    atoms(root, head, 0).forEach(function (t) { list = list.concat(expand(t)); });
+                    if (!list.length) return;
+
+                    var tl = gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top 78%', once: true } });
+                    list.forEach(function (t, i) {
+                        var at = i * .09;
+                        var words = (t === head) ? splitWords(t) : [];
+                        if (words.length) {
+                            tl.fromTo(words, { yPercent: 118, autoAlpha: 0 },
+                                { yPercent: 0, autoAlpha: 1, duration: .95, ease: 'power4.out', stagger: .04 }, at);
+                        } else {
+                            tl.fromTo(t, { y: 34, autoAlpha: 0 },
+                                { y: 0, autoAlpha: 1, duration: .95, ease: 'power4.out' }, at);
+                        }
+                    });
+                }
+
+                // Hero choreography: atmosphere, label, headline, copy, scroll cue — background before
+                // content, per the motion system's ordering rule.
+                function heroIntro() {
+                    var sec = document.getElementById('chap-0');
+                    if (!sec || !window.gsap) return;
+                    var h1 = sec.querySelector('h1');
+                    var words = splitWords(h1);
+                    var AT = [0, .18, .34, .95, 1.2];
+                    var tl = gsap.timeline();
+                    Array.prototype.slice.call(sec.querySelectorAll('[data-hero]'))
+                        .sort(function (a, b) { return a.dataset.hero - b.dataset.hero; })
+                        .forEach(function (el) {
+                            var at = AT[Number(el.dataset.hero)] || 0;
+                            if (Number(el.dataset.hero) === 0) {
+                                tl.fromTo(el, { autoAlpha: 0, scale: 1.14 },
+                                    { autoAlpha: 1, scale: 1, duration: 1.7, ease: 'power2.out' }, at);
+                            } else if (el === h1 && words.length) {
+                                tl.fromTo(words, { yPercent: 118, autoAlpha: 0 },
+                                    { yPercent: 0, autoAlpha: 1, duration: 1, ease: 'power4.out', stagger: .05 }, at);
+                            } else {
+                                tl.fromTo(el, { y: 26, autoAlpha: 0 },
+                                    { y: 0, autoAlpha: 1, duration: .9, ease: 'power4.out' }, at);
+                            }
+                        });
+                }
+
+                // Magnetic chapter arrows — the buttons lean toward the pointer instead of waiting to be
+                // hit exactly. quickTo reuses one tween per axis rather than spawning one per pointermove.
+                function initMagnetic() {
+                    if (matchMedia('(pointer: coarse)').matches) return;
+                    gsap.utils.toArray('[data-magnetic]').forEach(function (el) {
+                        var xTo = gsap.quickTo(el, 'x', { duration: .45, ease: 'power3.out' });
+                        var yTo = gsap.quickTo(el, 'y', { duration: .45, ease: 'power3.out' });
+                        el.addEventListener('pointermove', function (e) {
+                            var r = el.getBoundingClientRect();
+                            xTo((e.clientX - r.left - r.width / 2) * .34);
+                            yTo((e.clientY - r.top - r.height / 2) * .34);
+                        });
+                        el.addEventListener('pointerleave', function () { xTo(0); yTo(0); gsap.to(el, { scale: 1, duration: .3 }); });
+                        el.addEventListener('pointerdown', function () { gsap.to(el, { scale: .9, duration: .12 }); });
+                        el.addEventListener('pointerup', function () { gsap.to(el, { scale: 1, duration: .3 }); });
                     });
                 }
 
@@ -1247,10 +1402,8 @@
                     if (window.cineGL) window.cineGL.setChapter(i);
                     var cur = document.getElementById('cine-cur');
                     var nm = document.getElementById('cine-chapname');
-                    var prog = document.getElementById('cine-prog');
                     if (cur) cur.textContent = String(i + 1).padStart(2, '0');
                     if (nm) nm.textContent = secs[i].getAttribute('data-name') || '';
-                    if (prog) prog.style.width = (((i + 1) / secs.length) * 100) + '%';
                     if (nav) Array.prototype.slice.call(nav.children).forEach(function (c, j) {
                         var bar = c.querySelector('.idx-bar');
                         var name = c.querySelector('.idx-name');
@@ -1274,13 +1427,51 @@
                     else secs[idx].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
                 }
 
-                var last = 0;
-                window.addEventListener('scroll', function () {
-                    var now = performance.now();
-                    if (now - last < 60) return;
-                    last = now;
-                    computeActive();
-                }, { passive: true });
+                // Chapter sync. A 60ms-throttled scroll poll meant the WebGL treatment and the counter
+                // lagged the actual chapter boundary by up to a frame-and-a-half; ScrollTrigger fires on
+                // the boundary itself. It tracks scroll rather than animating, so reduced-motion keeps it.
+                var prog = document.getElementById('cine-prog');
+                if (hasST) {
+                    secs.forEach(function (s, i) {
+                        ScrollTrigger.create({
+                            trigger: s, start: 'top 45%', end: 'bottom 45%',
+                            onEnter: function () { setActive(i); },
+                            onEnterBack: function () { setActive(i); }
+                        });
+                    });
+                    if (prog) gsap.to(prog, {
+                        scaleX: 1, ease: 'none',
+                        scrollTrigger: { start: 0, end: 'max', scrub: .3 }
+                    });
+
+                    // The fixed reading chrome (counter + arrows) lives exactly where the footer lands, so
+                    // the last screen stacked "10 / 10 Connect" on top of the copyright line. Retire the
+                    // chrome as the footer arrives — at the end of the story it has nothing left to count.
+                    // The trigger is the footer's first visible pixel: it is only ~77px tall and pinned to
+                    // the page bottom, so its top never climbs far enough for an inset start to ever fire.
+                    var footer = root.querySelector('footer');
+                    var chrome = gsap.utils.toArray('.cine-botchrome');
+                    if (footer && chrome.length) {
+                        var fade = function (v) { gsap.to(chrome, { autoAlpha: v, duration: reduceMotion ? 0 : .35, ease: 'power2.out' }); };
+                        ScrollTrigger.create({
+                            trigger: footer, start: 'top bottom',
+                            onEnter: function () { fade(0); },
+                            onLeaveBack: function () { fade(1); }
+                        });
+                    }
+                } else {
+                    var last = 0;
+                    window.addEventListener('scroll', function () {
+                        var now = performance.now();
+                        if (now - last < 60) return;
+                        last = now;
+                        computeActive();
+                        if (prog) {
+                            var max = document.documentElement.scrollHeight - window.innerHeight;
+                            prog.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+                        }
+                    }, { passive: true });
+                }
                 computeActive();
 
                 var prev = document.getElementById('cine-prev');
