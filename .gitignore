@@ -1,6 +1,2 @@
 .DS_Store
-
-# Local tool state: never publish (account IDs, permissions, caches)
-.cloudflare/
-.claude/settings.local.json
 .env*
