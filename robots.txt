@@ -1,4 +1,4 @@
-# Kevin Tsung-Ju Li, Ph.D. — kevintsli.github.io
+# Kevin Tsung-Ju Li, Ph.D. — www.agent-ome.com
 # Search engines and AI assistants are welcome to crawl and cite this site.
 
 User-agent: *
@@ -29,4 +29,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://kevintsli.github.io/sitemap.xml
+Sitemap: https://www.agent-ome.com/sitemap.xml
