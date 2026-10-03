@@ -1,20 +1,15 @@
 # Kevin Tsung-Ju Li, Ph.D. — www.agent-ome.com
 # Search engines and AI assistants are welcome to crawl and cite this site.
+# Studio animation files are licensed work: model-training crawlers may read the pages but not /studio/media/.
 
 User-agent: *
 Allow: /
 
-# AI answer engines & training crawlers (explicitly welcomed for citation)
-User-agent: GPTBot
-Allow: /
-
+# AI answer engines (cite pages; full access)
 User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
 Allow: /
 
 User-agent: Claude-Web
@@ -23,10 +18,25 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
+# Model-training crawlers (pages yes, studio media no)
+User-agent: GPTBot
+Disallow: /studio/media/
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /studio/media/
+Allow: /
+
 User-agent: Google-Extended
+Disallow: /studio/media/
 Allow: /
 
 User-agent: Applebot-Extended
+Disallow: /studio/media/
+Allow: /
+
+User-agent: CCBot
+Disallow: /studio/media/
 Allow: /
 
 Sitemap: https://www.agent-ome.com/sitemap.xml
